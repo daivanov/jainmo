@@ -10,6 +10,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.test.dto.OptionalPojo;
 import uk.co.jemos.podam.test.dto.ImmutableListPojo;
+import uk.co.jemos.podam.test.dto.ImmutableListWithConstructorPojo;
 
 /**
  * Test @uk.co.jemos.podam.test.dto.OptionalPojo@ construction
@@ -58,6 +59,17 @@ public class GuavaOptionalUnitTest {
 	public void testGuavaImmutableListFieldSetting() throws Exception {
 
 		ImmutableListPojo<?> pojo = podam.manufacturePojo(ImmutableListPojo.class, String.class);
+		Assert.assertNotNull("Construction failed", pojo);
+		Assert.assertNotNull("Value attr should not be empty", pojo.getValue());
+		Assert.assertEquals("List should not be empty",
+				false, pojo.getValue().isEmpty());
+	}
+
+	@Test
+	public void testGuavaImmutableListWithConstructorFieldSetting() throws Exception {
+
+		ImmutableListWithConstructorPojo<?> pojo = podam.manufacturePojo(
+				ImmutableListWithConstructorPojo.class, String.class);
 		Assert.assertNotNull("Construction failed", pojo);
 		Assert.assertNotNull("Value attr should not be empty", pojo.getValue());
 		Assert.assertEquals("List should not be empty",
