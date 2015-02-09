@@ -1,10 +1,12 @@
 /**
- * 
+ *
  */
 package uk.co.jemos.podam.api;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
@@ -17,11 +19,11 @@ import net.jcip.annotations.Immutable;
  * will then be analysed to compose the list of setters which can be invoked to
  * create the state of a given POJO.
  * </p>
- * 
+ *
  * @author mtedone
- * 
+ *
  * @since 1.0.0
- * 
+ *
  */
 @Immutable
 public class ClassInfo implements Serializable {
@@ -37,29 +39,63 @@ public class ClassInfo implements Serializable {
 	/** The Set of setters belonging to this class */
 	private final Set<Method> classSetters;
 
+	/** The Set of constructors for this class. */
+	private final Set<Constructor<?>> constructors;
+
 	/**
 	 * Full constructor
-	 * 
+	 *
 	 * @param className
 	 *            The class name
 	 * @param classFields
 	 *            The set of fields belonging to this class
 	 * @param classSetters
 	 *            The set of setters belonging to this class
+	 *
+	 * @param constructors
+	 *            The set of constructors for this class
 	 */
 	public ClassInfo(Class<?> className, Set<String> classFields,
-			Set<Method> classSetters) {
+			Set<Method> classSetters, Set<Constructor<?>> constructors) {
 		super();
 		this.className = className;
-		this.classFields = classFields;
-		this.classSetters = classSetters;
+		this.classFields = new HashSet<String>(classFields);
+		this.classSetters = new HashSet<Method>(classSetters);
+		this.constructors = new HashSet<Constructor<?>>(constructors);
 	}
 
 	/**
 	 * @return the classSetters
 	 */
 	public Set<Method> getClassSetters() {
-		return classSetters;
+		return new HashSet<Method>(classSetters);
+	}
+
+	/**
+	 * It returns the constructors for this class.
+	 *
+	 * @return the constructors
+	 */
+	public Set<Constructor<?>> getConstructors() {
+		return constructors;
+	}
+
+	/**
+	 * It returns the class name.
+	 *
+	 * @return the className
+	 */
+	public Class<?> getClassName() {
+		return className;
+	}
+
+	/**
+	 * It returns the fields for this class.
+	 *
+	 * @return the classFields
+	 */
+	public Set<String> getClassFields() {
+		return new HashSet<String>(classFields);
 	}
 
 	/*
