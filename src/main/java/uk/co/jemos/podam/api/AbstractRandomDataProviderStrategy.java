@@ -64,6 +64,11 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	/** Flag to enable/disable the memoization setting. */
 	private final AtomicBoolean isMemoizationEnabled = new AtomicBoolean();
 
+	/** The resolver for specific implementations of abstract classes
+	 *  and interfaces */
+	private final SpecificImplementationsResolver implementationResolver
+			= new SpecificImplementationsResolver();
+
 	/**
 	 * A map to keep one object for each class. If memoization is enabled, the
 	 * factory will use this table to avoid creating objects of the same class
@@ -617,7 +622,9 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 		Class<? extends T> found = (Class<? extends T>) specificTypes
 				.get(nonInstantiatableClass);
 		if (found == null) {
-			found = nonInstantiatableClass;
+
+			found = implementationResolver
+					.getSpecificClass(nonInstantiatableClass);
 		}
 		return found;
 

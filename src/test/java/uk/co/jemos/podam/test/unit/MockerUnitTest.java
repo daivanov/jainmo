@@ -336,8 +336,7 @@ public class MockerUnitTest {
 	public void testJREPojoWithDependencyLoopInConstructor() {
 
 		URL pojo = factory.manufacturePojo(URL.class);
-		Assert.assertNull("Default strategy cannot create java.net.URL object",
-				pojo);
+		Assert.assertNotNull("The pojo cannot be null!", pojo);
 
 	}
 
