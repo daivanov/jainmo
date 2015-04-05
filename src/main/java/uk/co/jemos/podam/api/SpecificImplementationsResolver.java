@@ -6,6 +6,8 @@ package uk.co.jemos.podam.api;
 import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -344,6 +346,7 @@ public class SpecificImplementationsResolver {
 						 * memory footprint */
 						if (loaderCnt > ITERATIONS_BEFORE_GC) {
 							closeClassLoader(urlClassLoader);
+							System.gc();
 							loaderCnt = 0;
 							urlClassLoader = new URLClassLoader(pathUrls);
 						}
@@ -356,6 +359,12 @@ public class SpecificImplementationsResolver {
 							classes.add(clazz);
 						}
 					} catch(Throwable e) {
+						if (e instanceof OutOfMemoryError) {
+							for (MemoryPoolMXBean mx : ManagementFactory.getMemoryPoolMXBeans()) {
+								LOG.info("Memory information: {}[{}] {}/{}", mx.getName(), mx.getType(),
+										mx.getUsage().getUsed(), mx.getUsage().getMax());
+							}
+						}
 						LOG.error("Cannot load class for name {}: {}",
 								foundClass, e);
 					}
