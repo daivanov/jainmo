@@ -12,6 +12,9 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,6 +53,12 @@ import uk.co.jemos.podam.common.ConstructorLightFirstComparator;
 public class SpecificImplementationsResolver {
 
 	// ------------------->> Constants
+
+	/** File URL prefix */
+	private final static String FILE_URL_PREFIX = "file://";
+
+	/** Number of classes loaded before changing of garbage collector */
+	private final static int ITERATIONS_BEFORE_GC = 100;
 
 	// ------------------->> Instance / Static variables
 
@@ -281,6 +290,16 @@ public class SpecificImplementationsResolver {
 
 		LOG.info("Caching resource {}", path);
 
+		URL pathUrl;
+		try {
+			pathUrl = new URL(FILE_URL_PREFIX + path);
+		} catch (MalformedURLException e) {
+			throw new IllegalStateException("Provided path URL is malformed: " + path, e);
+		}
+		URL[] pathUrls = new URL[]{ pathUrl };
+
+		int loaderCnt = 0;
+		URLClassLoader urlClassLoader = new URLClassLoader(pathUrls);
 		ZipInputStream zip = null;
 		try {
 
@@ -316,11 +335,24 @@ public class SpecificImplementationsResolver {
 						}
 					}
 
-					Class<?> clazz = null;
 					try {
-						clazz = Class.forName(foundClass);
-						if (!Modifier.isInterface(clazz.getModifiers())
-								&& Modifier.isPublic(clazz.getModifiers())) {
+						/* Load class without initialization */
+						Class<?> uninitalized = urlClassLoader.loadClass(foundClass);
+						loaderCnt++;
+
+						/* Change loader every N iterations to reduce
+						 * memory footprint */
+						if (loaderCnt > ITERATIONS_BEFORE_GC) {
+							closeClassLoader(urlClassLoader);
+							loaderCnt = 0;
+							urlClassLoader = new URLClassLoader(pathUrls);
+						}
+
+						if (!Modifier.isInterface(uninitalized.getModifiers())
+							&& Modifier.isPublic(uninitalized.getModifiers())) {
+
+							/* Load class with initialization */
+							Class<?> clazz = Class.forName(foundClass);
 							classes.add(clazz);
 						}
 					} catch(Throwable e) {
@@ -337,12 +369,24 @@ public class SpecificImplementationsResolver {
 			LOG.error("Search in JAR file failed", t);
 		} finally {
 
+			closeClassLoader(urlClassLoader);
 			closeStream(zip);
 		}
 
 		resourceCache.put(path, classes);
 
 		return classes;
+	}
+
+	/**
+	 * Closes URL class loader safely
+	 * @param loader URL class loader to close
+	 */
+	private static void closeClassLoader(URLClassLoader loader) {
+
+		if (PodamUtils.getJavaSpecVersion() > 1.6) {
+			closeStream((Closeable) loader);
+		}
 	}
 
 	/**

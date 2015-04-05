@@ -49,6 +49,16 @@ public final class PodamUtils {
 	}
 
 	/**
+	 * Obtains current Java runtime specification version
+	 *
+	 * @return Java specification version converted to double value
+	 */
+	public static Double getJavaSpecVersion() {
+		String javaVersion = System.getProperty("java.vm.specification.version");
+		return Double.valueOf(javaVersion);
+	}
+
+	/**
 	 * It returns a {@link ClassInfo} object for the given class
 	 *
 	 * @param clazz
