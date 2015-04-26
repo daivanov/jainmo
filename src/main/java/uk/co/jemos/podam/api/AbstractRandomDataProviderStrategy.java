@@ -625,6 +625,9 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 
 			found = implementationResolver
 					.getSpecificClass(nonInstantiatableClass);
+			if (found != null) {
+				specificTypes.put(nonInstantiatableClass, found);
+			}
 		}
 		return found;
 
