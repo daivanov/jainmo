@@ -15,7 +15,6 @@ import java.lang.reflect.Type;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -68,7 +67,7 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	 * factory will use this table to avoid creating objects of the same class
 	 * multiple times.
 	 */
-	private final ConcurrentMap<Class<?>, Map<Type[], Object>> memoizationTable = new ConcurrentHashMap<Class<?>, Map<Type[], Object>>();
+	private final Map<Class<?>, Map<Type[], Object>> memoizationTable = new HashMap<Class<?>, Map<Type[], Object>>();
 
 	/**
 	 * A list of user-submitted specific implementations for interfaces and
@@ -419,7 +418,7 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getMemoizedObject(AttributeMetadata attributeMetadata) {
+	public synchronized Object getMemoizedObject(AttributeMetadata attributeMetadata) {
 
 		if (isMemoizationEnabled.get()) {
 			/* No memoization for arrays, collections and maps */
@@ -446,19 +445,14 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void cacheMemoizedObject(AttributeMetadata attributeMetadata,
+	public synchronized void cacheMemoizedObject(AttributeMetadata attributeMetadata,
 			Object instance) {
 
 		if (isMemoizationEnabled.get()) {
 			Map<Type[], Object> map = memoizationTable.get(attributeMetadata.getAttributeType());
 			if (map == null) {
 				map = new HashMap<Type[], Object>();
-
-				Map<Type[], Object> objectMap = memoizationTable.putIfAbsent(attributeMetadata.getAttributeType(), map);
-				if (null == objectMap) {
-					objectMap = map;
-				}
-
+				memoizationTable.put(attributeMetadata.getAttributeType(), map);
 			}
 			map.put(attributeMetadata.getAttrGenericArgs(), instance);
 		}
@@ -468,10 +462,9 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void clearMemoizationCache() {
+	public synchronized void clearMemoizationCache() {
 
 		memoizationTable.clear();
-
 
 	}
 
