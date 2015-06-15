@@ -1,9 +1,9 @@
 package uk.co.jemos.podam.test.unit;
 
-import junit.framework.Assert;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
+
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.api.RandomDataProviderStrategy;
@@ -23,6 +23,7 @@ import uk.co.jemos.podam.test.utils.PodamTestConstants;
 import uk.co.jemos.podam.test.utils.PodamTestUtils;
 
 import javax.activation.DataHandler;
+
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.*;

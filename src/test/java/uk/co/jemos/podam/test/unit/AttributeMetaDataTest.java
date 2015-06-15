@@ -1,7 +1,8 @@
 package uk.co.jemos.podam.test.unit;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
+
 import uk.co.jemos.podam.api.AbstractRandomDataProviderStrategy;
 import uk.co.jemos.podam.api.AttributeMetadata;
 import uk.co.jemos.podam.api.PodamFactory;
