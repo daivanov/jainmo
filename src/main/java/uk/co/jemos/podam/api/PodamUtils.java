@@ -92,7 +92,23 @@ public final class PodamUtils {
 
 	}
 
-
+	/**
+	 * It returns a {@link ClassInfo} object for the given class
+	 *
+	 * @param clazz
+	 *            The class to retrieve info from
+	 * @param excludeFieldAnnotations
+	 *            the fields marked with any of these annotations will not be
+	 *            included in the class info
+	 * @param excludedFields
+	 *            the fields matching the given names will not be included in the class info
+	 * @param attributeApprover
+	 *            a {@link ClassAttributeApprover} implementation,
+	 *             which defines which attributes to skip and which to process
+	 * @param extraMethods
+	 *            a collection of extra methods to be executed after POJO construction
+	 * @return a {@link ClassInfo} object for the given class
+	 */
 	public static ClassInfo getClassInfo(Class<?> clazz,
 										 Set<Class<? extends Annotation>> excludeFieldAnnotations,
 										 Set<String> excludedFields,
@@ -238,7 +254,7 @@ public final class PodamUtils {
 	 * @param excludedFields
 	 *            The {@link Set} containing field names to be excluded
 	 */
-	public static void fillPojoSets(Class<?> clazz, Set<Field> classFields,
+	private static void fillPojoSets(Class<?> clazz, Set<Field> classFields,
 			Set<Method> classGetters, Set<Method> classSetters,
 			Set<Class<? extends Annotation>> excludeAnnotations,
 			Set<String> excludedFields) {
@@ -250,7 +266,7 @@ public final class PodamUtils {
 
 		Class<?> workClass = clazz;
 
-		while (workClass != null) {
+		while (!Object.class.equals(workClass)) {
 
 			Method[] declaredMethods = workClass.getDeclaredMethods();
 
