@@ -93,6 +93,12 @@ public class ValidatedPojo {
 	@Size(min = 7, max = 10)
 	private String sizedString;
 
+	@Size(min = 7)
+	private String sizedMinString;
+
+	@Size(max = 10)
+	private String sizedMaxString;
+
 	@Size(max = 2)
 	private Collection<String> maxCollection;
 
@@ -267,6 +273,22 @@ public class ValidatedPojo {
 
 	public void setSizedString(String sizedString) {
 		this.sizedString = sizedString;
+	}
+
+	public String getSizedMinString() {
+		return sizedMinString;
+	}
+
+	public void setSizedMinString(String sizedMinString) {
+		this.sizedMinString = sizedMinString;
+	}
+
+	public String getSizedMaxString() {
+		return sizedMaxString;
+	}
+
+	public void setSizedMaxString(String sizedMaxString) {
+		this.sizedMaxString = sizedMaxString;
 	}
 
 	public Collection<String> getMaxCollection() {

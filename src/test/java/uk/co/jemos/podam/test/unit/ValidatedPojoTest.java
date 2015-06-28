@@ -83,6 +83,8 @@ public class ValidatedPojoTest {
 		Assert.assertNotNull("Empty field pastDate", pojo.getPastDate());
 		Assert.assertNotNull("Empty field futureCalendar", pojo.getFutureCalendar());
 		Assert.assertNotNull("Empty field sizedString", pojo.getSizedString());
+		Assert.assertNotNull("Empty field sizedString", pojo.getSizedMinString());
+		Assert.assertNotNull("Empty field sizedString", pojo.getSizedMaxString());
 		Assert.assertNotNull("Empty field maxCollection", pojo.getMaxCollection());
 		Assert.assertNotNull("Empty field minCollection", pojo.getMinCollection());
 		Assert.assertNotNull("Empty field email", pojo.getEmail());
