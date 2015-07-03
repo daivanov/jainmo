@@ -1277,9 +1277,20 @@ public class PodamFactoryImpl implements PodamFactory {
 
 		Class<?> pojoClass = pojo.getClass();
 		if (pojo instanceof Collection && ((Collection<?>)pojo).size() == 0) {
-			fillCollection((Collection<? super Object>)pojo, manufacturingCtx, typeArgsMap, genericTypeArgs);
+			Collection<? super Object> collection = (Collection<? super Object>)pojo;
+			AtomicReference<Type[]> elementGenericTypeArgs = new AtomicReference<Type[]>(
+					NO_TYPES);
+			Class<?> elementTypeClass = findInheretedCollectionElementType(collection,
+					manufacturingCtx, elementGenericTypeArgs, typeArgsMap, genericTypeArgs);
+			String attributeName = null;
+			Annotation[] annotations = collection.getClass().getAnnotations();
+			fillCollection(manufacturingCtx, Arrays.asList(annotations), attributeName,
+					collection, elementTypeClass, elementGenericTypeArgs.get());
 		} else if (pojo instanceof Map && ((Map<?,?>)pojo).size() == 0) {
-			fillMap((Map<? super Object,? super Object>)pojo, manufacturingCtx, typeArgsMap, genericTypeArgs);
+			MapArguments mapArguments = findInheretedMapElementType(
+					(Map<? super Object,? super Object>)pojo,
+					manufacturingCtx, typeArgsMap, genericTypeArgs);
+			fillMap(mapArguments, manufacturingCtx);
 		}
 
 		Class<?>[] parameterTypes = null;
@@ -2042,52 +2053,6 @@ public class PodamFactoryImpl implements PodamFactory {
 	 * as argument.
 	 * </p>
 	 *
-	 * @param collection
-	 *          The Collection to be filled
-	 * @param manufacturingCtx
-	 *          the manufacturing context
-	 * @param typeArgsMap
-	 *          a map relating the generic class arguments ("&lt;T, V&gt;" for
-	 *          example) with their actual types
-	 * @param genericTypeArgs
-	 *          The generic type arguments for the current generic class
-	 *          instance
-	 * @throws InstantiationException
-	 *          If an exception occurred during instantiation
-	 * @throws IllegalAccessException
-	 *          If security was violated while creating the object
-	 * @throws InvocationTargetException
-	 *          If an exception occurred while invoking the constructor or
-	 *          factory method
-	 * @throws ClassNotFoundException
-	 *          If it was not possible to create a class from a string
-	 *
-	 */
-	private void fillCollection(Collection<? super Object> collection,
-			ManufacturingContext manufacturingCtx, Map<String, Type> typeArgsMap,
-			Type... genericTypeArgs)
-			throws InstantiationException, IllegalAccessException,
-			InvocationTargetException, ClassNotFoundException {
-
-		AtomicReference<Type[]> elementGenericTypeArgs = new AtomicReference<Type[]>(
-				NO_TYPES);
-		Class<?> elementTypeClass = findInheretedCollectionElementType(collection,
-				manufacturingCtx, elementGenericTypeArgs, typeArgsMap, genericTypeArgs);
-		String attributeName = null;
-		Annotation[] annotations = collection.getClass().getAnnotations();
-		fillCollection(manufacturingCtx, Arrays.asList(annotations), attributeName,
-				collection, elementTypeClass, elementGenericTypeArgs.get());
-	}
-
-	/**
-	 * It fills a collection with the required number of elements of the
-	 * required type.
-	 *
-	 * <p>
-	 * This method has a so-called side effect. It updates the collection passed
-	 * as argument.
-	 * </p>
-	 *
 	 * @param manufacturingCtx
 	 *            the manufacturing context
 	 * @param annotations
@@ -2224,13 +2189,11 @@ public class PodamFactoryImpl implements PodamFactory {
 					NO_TYPES);
 			if (genericTypeArgs == null || genericTypeArgs.length == 0) {
 
-				LOG.warn("Map attribute: "
-						+ attributeName
-						+ " is non-generic. We will assume a Map<Object, Object> for you.");
+				MapArguments mapArgs = findInheretedMapElementType(retValue, manufacturingCtx, typeArgsMap, genericTypeArgs);
 
-				keyClass = Object.class;
+				keyClass = mapArgs.getKeyClass();
 
-				elementClass = Object.class;
+				elementClass = mapArgs.getElementClass();
 
 			} else {
 
@@ -2275,15 +2238,10 @@ public class PodamFactoryImpl implements PodamFactory {
 	}
 
 	/**
-	 * It fills a Map with the required number of elements of the required type.
-	 *
-	 * <p>
-	 * This method has a so-called side-effect. It updates the Map given as
-	 * argument.
-	 * </p>
+	 * Finds key and element type arguments 
 	 *
 	 * @param map
-	 *          The map being initialised
+	 *          The map being initialized
 	 * @param manufacturingCtx
 	 *          the manufacturing context
 	 * @param typeArgsMap
@@ -2292,22 +2250,13 @@ public class PodamFactoryImpl implements PodamFactory {
 	 * @param genericTypeArgs
 	 *          The generic type arguments for the current generic class
 	 *          instance
-	 * @throws InstantiationException
-	 *          If an exception occurred during instantiation
-	 * @throws IllegalAccessException
-	 *          If security was violated while creating the object
-	 * @throws InvocationTargetException
-	 *          If an exception occurred while invoking the constructor or
-	 *          factory method
-	 * @throws ClassNotFoundException
-	 *          If it was not possible to create a class from a string
+	 * @return
+	 *        Inherited map key and element types
 	 *
 	 */
-	private void fillMap(Map<? super Object, ? super Object> map,
+	private MapArguments findInheretedMapElementType(Map<? super Object, ? super Object> map,
 			ManufacturingContext manufacturingCtx, Map<String, Type> typeArgsMap,
-			Type... genericTypeArgs)
-			throws InstantiationException, IllegalAccessException,
-			InvocationTargetException, ClassNotFoundException {
+			Type... genericTypeArgs) {
 
 		Class<?> pojoClass = map.getClass();
 		Class<?> mapClass = pojoClass;
@@ -2358,7 +2307,7 @@ public class PodamFactoryImpl implements PodamFactory {
 		mapArguments.setKeyGenericTypeArgs(keyGenericArgs);
 		mapArguments.setElementGenericTypeArgs(elementGenericArgs);
 
-		fillMap(mapArguments, manufacturingCtx);
+		return mapArguments;
 	}
 
 	/**
