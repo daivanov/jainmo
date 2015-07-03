@@ -1937,11 +1937,8 @@ public class PodamFactoryImpl implements PodamFactory {
 					NO_TYPES);
 			if (genericTypeArgs == null || genericTypeArgs.length == 0) {
 
-				LOG.warn("The collection attribute: "
-						+ attributeName
-						+ " does not have a type. We will assume Object for you");
-				// Support for non-generified collections
-				typeClass = Object.class;
+				typeClass = findInheretedCollectionElementType(retValue,
+						manufacturingCtx, elementGenericTypeArgs, typeArgsMap, genericTypeArgs);
 
 			} else {
 				Type actualTypeArgument = genericTypeArgs[0];
@@ -1974,6 +1971,66 @@ public class PodamFactoryImpl implements PodamFactory {
 		}
 
 		return retValue;
+	}
+
+	/**
+	 * Tries to find collection element type from collection object
+	 *
+	 * @param collection
+	 *          The collection to be filled
+	 * @param manufacturingCtx
+	 *          the manufacturing context
+	 * @param elementGenericTypeArgs
+	 *          parameter to return generic arguments of collection element
+	 * @param typeArgsMap
+	 *          a map relating the generic class arguments ("&lt;T, V&gt;" for
+	 *          example) with their actual types
+	 * @param genericTypeArgs
+	 *          The generic type arguments for the current generic class
+	 *          instance
+	 * @return
+	 *        class type of collection element
+	 */
+	private Class<?> findInheretedCollectionElementType(
+			Collection<? super Object> collection, ManufacturingContext manufacturingCtx,
+			AtomicReference<Type[]> elementGenericTypeArgs,
+			Map<String, Type> typeArgsMap, Type... genericTypeArgs) {
+
+		Class<?> pojoClass = collection.getClass();
+		Class<?> collectionClass = pojoClass;
+		Type[] typeParams = collectionClass.getTypeParameters();
+		main : while (typeParams.length < 1) {
+			for (Type genericIface : collectionClass.getGenericInterfaces()) {
+				Class<?> clazz = resolveGenericParameter(genericIface,
+						typeArgsMap, elementGenericTypeArgs);
+				if (Collection.class.isAssignableFrom(clazz)) {
+					collectionClass = clazz;
+					typeParams = elementGenericTypeArgs.get();
+					continue main;
+				}
+			}
+			Type type = collectionClass.getGenericSuperclass();
+			if (type != null) {
+				Class<?> clazz = resolveGenericParameter(type, typeArgsMap,
+						elementGenericTypeArgs);
+				if (Collection.class.isAssignableFrom(clazz)) {
+					collectionClass = clazz;
+					typeParams = elementGenericTypeArgs.get();
+					continue main;
+				}
+			}
+			if (Collection.class.equals(collectionClass)) {
+				LOG.warn("Collection {} doesn't have generic types,"
+						+ "will use Object instead", pojoClass);
+				typeParams = new Type[] { Object.class };
+			}
+		}
+		Class<?> elementTypeClass = resolveGenericParameter(typeParams[0],
+					typeArgsMap, elementGenericTypeArgs);
+		Type[] elementGenericArgs = mergeTypeArrays(elementGenericTypeArgs.get(),
+				genericTypeArgs);
+		elementGenericTypeArgs.set(elementGenericArgs);
+		return elementTypeClass;
 	}
 
 	/**
@@ -2012,45 +2069,14 @@ public class PodamFactoryImpl implements PodamFactory {
 			throws InstantiationException, IllegalAccessException,
 			InvocationTargetException, ClassNotFoundException {
 
-		Class<?> pojoClass = collection.getClass();
-		Annotation[] annotations = collection.getClass().getAnnotations();
 		AtomicReference<Type[]> elementGenericTypeArgs = new AtomicReference<Type[]>(
 				NO_TYPES);
-		Class<?> collectionClass = pojoClass;
-		Type[] typeParams = collectionClass.getTypeParameters();
-		main : while (typeParams.length < 1) {
-			for (Type genericIface : collectionClass.getGenericInterfaces()) {
-				Class<?> clazz = resolveGenericParameter(genericIface,
-						typeArgsMap, elementGenericTypeArgs);
-				if (Collection.class.isAssignableFrom(clazz)) {
-					collectionClass = clazz;
-					typeParams = elementGenericTypeArgs.get();
-					continue main;
-				}
-			}
-			Type type = collectionClass.getGenericSuperclass();
-			if (type != null) {
-				Class<?> clazz = resolveGenericParameter(type, typeArgsMap,
-						elementGenericTypeArgs);
-				if (Collection.class.isAssignableFrom(clazz)) {
-					collectionClass = clazz;
-					typeParams = elementGenericTypeArgs.get();
-					continue main;
-				}
-			}
-			if (Collection.class.equals(collectionClass)) {
-				LOG.warn("Collection {} doesn't have generic types,"
-						+ "will use Object instead", pojoClass);
-				typeParams = new Type[] { Object.class };
-			}
-		}
-		Class<?> elementTypeClass = resolveGenericParameter(typeParams[0],
-					typeArgsMap, elementGenericTypeArgs);
-		Type[] elementGenericArgs = mergeTypeArrays(elementGenericTypeArgs.get(),
-				genericTypeArgs);
+		Class<?> elementTypeClass = findInheretedCollectionElementType(collection,
+				manufacturingCtx, elementGenericTypeArgs, typeArgsMap, genericTypeArgs);
 		String attributeName = null;
+		Annotation[] annotations = collection.getClass().getAnnotations();
 		fillCollection(manufacturingCtx, Arrays.asList(annotations), attributeName,
-				collection, elementTypeClass, elementGenericArgs);
+				collection, elementTypeClass, elementGenericTypeArgs.get());
 	}
 
 	/**
