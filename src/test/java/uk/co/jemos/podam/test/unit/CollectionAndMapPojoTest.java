@@ -21,6 +21,14 @@ public class CollectionAndMapPojoTest {
 		PodamTestUtils.assertCollectionElementsType(pojo.getList(), String.class);
 		assertNotNull(pojo.getMap());
 		PodamTestUtils.assertMapElementsType(pojo.getMap(), Integer.class, String.class);
+		assertNotNull(pojo.getList2());
+		PodamTestUtils.assertCollectionElementsType(pojo.getList2(), String.class);
+		assertNotNull(pojo.getMap2());
+		PodamTestUtils.assertMapElementsType(pojo.getMap2(), Integer.class, String.class);
+		assertNotNull(pojo.getList3());
+		PodamTestUtils.assertCollectionElementsType(pojo.getList3(), String.class);
+		assertNotNull(pojo.getMap3());
+		PodamTestUtils.assertMapElementsType(pojo.getMap3(), Integer.class, String.class);
 	}
 
 }
