@@ -9,7 +9,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.test.dto.PojoWithCollectionAndMap;
 import uk.co.jemos.podam.test.utils.PodamTestUtils;
 
-public class CollectionAndMapPojoTest {
+public class DefaultCollectionAndMapPojoTest {
 
 	@Test
 	public void testPojoAttributeImplementingListAndMapWithDefaultValues() {
