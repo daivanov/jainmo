@@ -6,9 +6,8 @@ package uk.co.jemos.podam.api;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
 
+import uk.co.jemos.podam.common.PodamConstants;
 import net.jcip.annotations.Immutable;
 
 /**
@@ -42,7 +41,7 @@ public class AttributeMetadata implements Serializable {
 	private final Type[] attrGenericArgs;
 
 	/** The attribute annotations */
-	private final List<Annotation> attributeAnnotations;
+	private final Annotation[] attributeAnnotations;
 
 	/** Type of class that owns the attribute */
 	private final Class<?> pojoClass;
@@ -64,7 +63,7 @@ public class AttributeMetadata implements Serializable {
 	 *            The type of class that owns the attribute
 	 */
 	public AttributeMetadata(String attributeName, Class<?> attributeType,
-			Type[] attrGenericArgs, List<Annotation> attributeAnnotations,
+			Type[] attrGenericArgs, Annotation[] attributeAnnotations,
 			Class<?> declaringClass) {
 		this.attributeName = attributeName;
 		this.attributeType = attributeType;
@@ -85,8 +84,8 @@ public class AttributeMetadata implements Serializable {
 	 */
 	public AttributeMetadata(Class<?> attributeType, Type[] attrGenericArgs,
 			Class<?> declaringClass) {
-		this(null, attributeType, attrGenericArgs,
-				Collections.<Annotation>emptyList(), declaringClass);
+		this(null, attributeType, attrGenericArgs, PodamConstants.NO_ANNOTATIONS,
+				declaringClass);
 	}
 
 	// ------------------->> Public methods
@@ -105,7 +104,7 @@ public class AttributeMetadata implements Serializable {
 		return attrGenericArgs;
 	}
 
-	public List<Annotation> getAttributeAnnotations() {
+	public Annotation[] getAttributeAnnotations() {
 		return attributeAnnotations;
 	}
 

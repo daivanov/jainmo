@@ -3,6 +3,8 @@
  */
 package uk.co.jemos.podam.common;
 
+import java.lang.annotation.Annotation;
+
 
 
 /**
@@ -17,9 +19,8 @@ public final class PodamConstants {
 
 	// ------------------->> Constants
 
-	// ------------------->> Instance / Static variables
-
-	// ------------------->> Constructors
+	/** Empty annotations array */
+	public static final Annotation[] NO_ANNOTATIONS = new Annotation[0];
 
 	/**
 	 * The default string length that Podam will assign to an annotated
@@ -32,6 +33,10 @@ public final class PodamConstants {
 
 	/** The default encoding for Strings */
 	public static final String STR_DEFAULT_ENCODING = "UTF-8";
+
+	// ------------------->> Instance / Static variables
+
+	// ------------------->> Constructors
 
 	/** Non-instantiable constructor */
 	private PodamConstants() {

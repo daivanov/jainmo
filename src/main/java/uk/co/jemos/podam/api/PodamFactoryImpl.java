@@ -25,6 +25,7 @@ import uk.co.jemos.podam.api.DataProviderStrategy.Order;
 import uk.co.jemos.podam.common.AttributeStrategy;
 import uk.co.jemos.podam.common.BeanValidationStrategy;
 import uk.co.jemos.podam.common.ManufacturingContext;
+import uk.co.jemos.podam.common.PodamConstants;
 import uk.co.jemos.podam.exceptions.PodamMockeryException;
 
 import javax.validation.Constraint;
@@ -47,7 +48,6 @@ import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -543,7 +543,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *            The attribute's metadata, if any, used for customisation
 	 * @return The boolean value indicated in the annotation
 	 */
-	private Boolean getBooleanValueForAnnotation(List<Annotation> annotations,
+	private Boolean getBooleanValueForAnnotation(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 
 		Boolean retValue = null;
@@ -581,7 +581,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If the {@link PodamByteValue#numValue()} value has been set
 	 *             and it is not convertible to a byte type
 	 */
-	private Byte getByteValueWithinRange(List<Annotation> annotations,
+	private Byte getByteValueWithinRange(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 		Byte retValue = null;
 
@@ -645,7 +645,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If {@link PodamShortValue#numValue()} was set and its value
 	 *             could not be converted to a Short type
 	 */
-	private Short getShortValueWithinRange(List<Annotation> annotations,
+	private Short getShortValueWithinRange(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 
 		Short retValue = null;
@@ -705,7 +705,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 * @return A random {@link Character} value
 	 */
 	private Character getCharacterValueWithinRange(
-			List<Annotation> annotations, AttributeMetadata attributeMetadata) {
+			Annotation[] annotations, AttributeMetadata attributeMetadata) {
 
 		Character retValue = null;
 
@@ -763,7 +763,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If it was not possible to convert the
 	 *             {@link PodamIntValue#numValue()} to an Integer
 	 */
-	private Integer getIntegerValueWithinRange(List<Annotation> annotations,
+	private Integer getIntegerValueWithinRange(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 
 		Integer retValue = null;
@@ -833,7 +833,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If {@link PodamFloatValue#numValue()} contained a value not
 	 *             convertible to a Float type
 	 */
-	private Float getFloatValueWithinRange(List<Annotation> annotations,
+	private Float getFloatValueWithinRange(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 
 		Float retValue = null;
@@ -893,7 +893,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *
 	 * @return a random {@link Double} value
 	 */
-	private Double getDoubleValueWithinRange(List<Annotation> annotations,
+	private Double getDoubleValueWithinRange(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 
 		Double retValue = null;
@@ -960,7 +960,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If it was not possible to convert
 	 *             {@link PodamLongValue#numValue()} to a Long
 	 */
-	private Long getLongValueWithinRange(List<Annotation> annotations,
+	private Long getLongValueWithinRange(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) {
 
 		Long retValue = null;
@@ -1024,7 +1024,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *         with the value for the wrapper class
 	 */
 	private Object resolveBoxedValue(Class<?> boxedType,
-			List<Annotation> annotations, AttributeMetadata attributeMetadata) {
+			Annotation[] annotations, AttributeMetadata attributeMetadata) {
 
 		Object retValue = null;
 
@@ -1225,7 +1225,7 @@ public class PodamFactoryImpl implements PodamFactory {
 
 		if (pojoClass.isPrimitive()) {
 			// For JDK POJOs we can't retrieve attribute name
-			return (T) resolveBoxedValue(pojoClass, Collections.<Annotation>emptyList(),
+			return (T) resolveBoxedValue(pojoClass, PodamConstants.NO_ANNOTATIONS,
 					new AttributeMetadata(pojoClass, genericTypeArgs, pojoClass));
 		}
 
@@ -1323,7 +1323,7 @@ public class PodamFactoryImpl implements PodamFactory {
 					manufacturingCtx, elementGenericTypeArgs, typeArgsMap, genericTypeArgs);
 			String attributeName = null;
 			Annotation[] annotations = collection.getClass().getAnnotations();
-			fillCollection(manufacturingCtx, Arrays.asList(annotations), attributeName,
+			fillCollection(manufacturingCtx, annotations, attributeName,
 					collection, elementTypeClass, elementGenericTypeArgs.get());
 		} else if (pojo instanceof Map && ((Map<?,?>)pojo).size() == 0) {
 			MapArguments mapArguments = findInheretedMapElementType(
@@ -1385,7 +1385,7 @@ public class PodamFactoryImpl implements PodamFactory {
 
 			String attributeName = PodamUtils
 					.extractFieldNameFromSetterMethod(setter);
-			List<Annotation> pojoAttributeAnnotations
+			Annotation[] pojoAttributeAnnotations
 					= PodamUtils.getAttributeAnnotations(
 							attribute.getAttribute(), setter);
 
@@ -1575,7 +1575,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 */
 	private Object manufactureAttributeValue(Object pojo,
 			ManufacturingContext manufacturingCtx, Class<?> attributeType,
-			Type genericAttributeType, List<Annotation> annotations,
+			Type genericAttributeType, Annotation[] annotations,
 			String attributeName, Map<String, Type> typeArgsMap,
 			Type... genericTypeArgs)
 			throws InstantiationException, IllegalAccessException,
@@ -1792,13 +1792,13 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If {@link PodamStrategyValue} was specified but the type was
 	 *             not correct for the attribute being set
 	 */
-	private String resolveStringValue(List<Annotation> annotations,
+	private String resolveStringValue(Annotation[] annotations,
 			AttributeMetadata attributeMetadata) throws InstantiationException,
 			IllegalAccessException {
 
 		String retValue = null;
 
-		if (annotations == null || annotations.isEmpty()) {
+		if (annotations == null || annotations.length == 0) {
 
 			retValue = strategy.getStringValue(attributeMetadata);
 
@@ -1853,13 +1853,11 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *         if attribute strategy cannot be instantiated
 	 */
 	private AttributeStrategy<?> findAttributeStrategy(
-			List<Annotation> annotations, Class<?> attributeType)
+			Annotation[] annotations, Class<?> attributeType)
 					throws InstantiationException, IllegalAccessException {
 
-		List<Annotation> localAnnotations = new ArrayList<Annotation>(annotations);
-		Iterator<Annotation> iter = localAnnotations.iterator();
-		while (iter.hasNext()) {
-			Annotation annotation = iter.next();
+		List<Annotation> localAnnotations = new ArrayList<Annotation>();
+		for (Annotation annotation : annotations) {
 			if (annotation instanceof PodamStrategyValue) {
 				PodamStrategyValue strategyAnnotation = (PodamStrategyValue) annotation;
 				return strategyAnnotation.value().newInstance();
@@ -1882,16 +1880,16 @@ public class PodamFactoryImpl implements PodamFactory {
 			}
 
 			if (annotation.annotationType().getAnnotation(Constraint.class) != null) {
-				if (annotation instanceof NotNull) {
-					/* We don't need to do anything for NotNull constraint */
-					iter.remove();
-				} else if (!NotNull.class.getPackage().equals(annotationClass.getPackage())) {
-					LOG.warn("Please, registrer AttributeStratergy for custom "
-							+ "constraint {}, in DataProviderStrategy! Value "
-							+ "will be left to null", annotation);
+				/* We don't need to do anything for NotNull constraint */
+				if (!(annotation instanceof NotNull)) {
+					/* Warning for custom constraints */
+					if (!NotNull.class.getPackage().equals(annotationClass.getPackage())) {
+						LOG.warn("Please, register AttributeStratergy for custom "
+								+ "constraint {}, in DataProviderStrategy! Value "
+								+ "will be left to null", annotation);
+					}
+					localAnnotations.add(annotation);
 				}
-			} else {
-				iter.remove();
 			}
 		}
 
@@ -1963,7 +1961,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	private Collection<? super Object> resolveCollectionValueWhenCollectionIsPojoAttribute(
 			Object pojo, ManufacturingContext manufacturingCtx,
 			Class<?> collectionType, String attributeName,
-			List<Annotation> annotations, Map<String, Type> typeArgsMap,
+			Annotation[] annotations, Map<String, Type> typeArgsMap,
 			Type... genericTypeArgs) {
 
 		// This needs to be generic because collections can be of any type
@@ -2117,7 +2115,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *
 	 */
 	private void fillCollection(ManufacturingContext manufacturingCtx,
-			List<Annotation> annotations, String attributeName,
+			Annotation[] annotations, String attributeName,
 			Collection<? super Object> collection,
 			Class<?> collectionElementType, Type... genericTypeArgs)
 			throws InstantiationException, IllegalAccessException,
@@ -2201,7 +2199,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	private Map<? super Object, ? super Object> resolveMapValueWhenMapIsPojoAttribute(
 			Object pojo, ManufacturingContext manufacturingCtx,
 			Class<?> attributeType, String attributeName,
-			List<Annotation> annotations, Map<String, Type> typeArgsMap,
+			Annotation[] annotations, Map<String, Type> typeArgsMap,
 			Type... genericTypeArgs) {
 
 		Map<? super Object, ? super Object> retValue = null;
@@ -2339,7 +2337,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				genericTypeArgs);
 
 		MapArguments mapArguments = new MapArguments();
-		mapArguments.setAnnotations(Arrays.asList(pojoClass.getAnnotations()));
+		mapArguments.setAnnotations(pojoClass.getAnnotations());
 		mapArguments.setMapToBeFilled(map);
 		mapArguments.setKeyClass(keyClass);
 		mapArguments.setElementClass(elementClass);
@@ -2531,7 +2529,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 */
 	private Object resolveArrayElementValue(Class<?> attributeType,
 			Type genericType, String attributeName, ManufacturingContext manufacturingCtx,
-			List<Annotation> annotations, Object pojo,
+			Annotation[] annotations, Object pojo,
 			Map<String, Type> typeArgsMap) throws InstantiationException,
 			IllegalAccessException, InvocationTargetException,
 			ClassNotFoundException {
@@ -2626,7 +2624,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 * @throws IllegalAccessException
 	 *        A strategy cannot be instantiated
 	 */
-	private Integer findCollectionSize(List<Annotation> annotations,
+	private Integer findCollectionSize(Annotation[] annotations,
 			Class<?> collectionElementType,
 			Holder<AttributeStrategy<?>> elementStrategyHolder,
 			Holder<AttributeStrategy<?>> keyStrategyHolder)
@@ -2834,8 +2832,7 @@ public class PodamFactoryImpl implements PodamFactory {
 
 			for (int idx = 0; idx < parameterTypes.length; idx++) {
 
-				List<Annotation> annotations = Arrays
-						.asList(parameterAnnotations[idx]);
+				Annotation[] annotations = parameterAnnotations[idx];
 
 				Type genericType = (idx < genericTypes.length) ?
 						genericTypes[idx] : parameterTypes[idx];
@@ -2903,8 +2900,7 @@ public class PodamFactoryImpl implements PodamFactory {
 
 			for (int idx = 0; idx < parameterTypes.length; idx++) {
 
-				List<Annotation> annotations = Arrays
-						.asList(parameterAnnotations[idx]);
+				Annotation[] annotations = parameterAnnotations[idx];
 
 				Type genericType = (idx < genericTypes.length) ?
 						genericTypes[idx] : parameterTypes[idx];
@@ -2948,7 +2944,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *             If it was not possible to create a class from a string
 	 */
 	private Object manufactureParameterValue(Class<?> pojoClass, Class<?> parameterType,
-			Type genericType, List<Annotation> annotations,
+			Type genericType, Annotation[] annotations,
 			final Map<String, Type> typeArgsMap, ManufacturingContext manufacturingCtx,
 			Type... genericTypeArgs)
 			throws InstantiationException, IllegalAccessException,
@@ -3089,17 +3085,7 @@ public class PodamFactoryImpl implements PodamFactory {
 	 */
 	private Type[] mergeTypeArrays(Type[] original, Type[] extra) {
 
-		Type[] merged;
-
-		if (extra != null) {
-			merged = new Type[original.length + extra.length];
-			System.arraycopy(original, 0, merged, 0, original.length);
-			System.arraycopy(extra, 0, merged, original.length, extra.length);
-		} else {
-			merged = original;
-		}
-
-		return merged;
+		return PodamUtils.mergeArrays(Type.class, original, extra);
 	}
 
 	/**

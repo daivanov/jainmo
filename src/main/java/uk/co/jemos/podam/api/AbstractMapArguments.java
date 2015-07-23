@@ -1,7 +1,6 @@
 package uk.co.jemos.podam.api;
 
 import java.lang.annotation.Annotation;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,7 +16,7 @@ public abstract class AbstractMapArguments {
 	/** The Map to be returned. */
 	private Map<? super Object, ? super Object> mapToBeFilled;
 	/** The annotations for the attribute. */
-	private List<Annotation> annotations;
+	private Annotation[] annotations;
 
 	/**
 	 * @return the attribute name for this map
@@ -53,7 +52,7 @@ public abstract class AbstractMapArguments {
 	/**
 	 * @return the annotations
 	 */
-	public List<Annotation> getAnnotations() {
+	public Annotation[] getAnnotations() {
 		return annotations;
 	}
 
@@ -61,7 +60,7 @@ public abstract class AbstractMapArguments {
 	 * @param annotations
 	 *            the annotations to set
 	 */
-	public void setAnnotations(List<Annotation> annotations) {
+	public void setAnnotations(Annotation[] annotations) {
 		this.annotations = annotations;
 	}
 

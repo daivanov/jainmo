@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import uk.co.jemos.podam.annotation.PodamExclude;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -445,22 +446,46 @@ public final class PodamUtils {
 	 *            The class attribute's setter
 	 * @return all annotations for the attribute
 	 */
-	public static List<Annotation> getAttributeAnnotations(final Field attribute,
+	public static Annotation[] getAttributeAnnotations(final Field attribute,
 			final Method setter) {
 
 		Annotation[] annotations = (attribute != null ? attribute.getAnnotations() : null);
-
-		List<Annotation> retValue;
-		if (annotations != null && annotations.length != 0) {
-			retValue = Arrays.asList(annotations);
+		Annotation[] setterAnnotations = setter.getParameterAnnotations()[0];
+		if (annotations == null) {
+			return setterAnnotations;
 		} else {
-			retValue = new ArrayList<Annotation>();
+			return mergeArrays(Annotation.class, annotations, setterAnnotations);
 		}
-		for (Annotation annotation : setter.getParameterAnnotations()[0]) {
-			retValue.add(annotation);
+	}
+
+	/**
+	 * Utility method to merge two arrays
+	 *
+	 * @param <E>
+	 *            The type of array elements
+	 * @param componentType
+	 *            The type of array elements
+	 * @param original
+	 *            The main array
+	 * @param extra
+	 *            The additional array, optionally may be null
+	 * @return A merged array of original and extra arrays
+	 */
+	public static <E> E[] mergeArrays(Class<E> componentType, E[] original, E[] extra) {
+
+		E[] merged;
+
+		if (extra != null) {
+			@SuppressWarnings("unchecked")
+			final E[] array = (E[]) Array.newInstance(componentType, original.length + extra.length);
+			merged = array;
+			System.arraycopy(original, 0, merged, 0, original.length);
+			System.arraycopy(extra, 0, merged, original.length, extra.length);
+		} else {
+			merged = original;
 		}
 
-		return retValue;
+		return merged;
 	}
 
 	/**
