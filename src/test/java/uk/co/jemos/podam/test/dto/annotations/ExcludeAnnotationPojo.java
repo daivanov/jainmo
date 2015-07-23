@@ -1,11 +1,12 @@
 /**
  * 
  */
-package uk.co.jemos.podam.test.dto;
+package uk.co.jemos.podam.test.dto.annotations;
 
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamExclude;
+import uk.co.jemos.podam.test.dto.SimplePojoToTestSetters;
 
 /**
  * @author mtedone
