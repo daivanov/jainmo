@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+import uk.co.jemos.podam.test.dto.annotations.AnnotatedFieldAndSetterPojo;
 import uk.co.jemos.podam.test.dto.annotations.BooleanValuePojo;
 import uk.co.jemos.podam.test.dto.annotations.ByteValuePojo;
 import uk.co.jemos.podam.test.dto.annotations.ByteValueWithErrorPojo;
@@ -36,6 +37,17 @@ import uk.co.jemos.podam.test.utils.PodamTestUtils;
 public class AnnotationsUnitTest {
 
 	private static final PodamFactory factory = new PodamFactoryImpl();
+
+	@Test
+	public void testAnnotatedFieldAndSetter() {
+		AnnotatedFieldAndSetterPojo pojo = factory
+				.manufacturePojo(AnnotatedFieldAndSetterPojo.class);
+		Assert.assertNotNull("The pojo should not be null!", pojo);
+		Assert.assertNotNull(
+				"Field must be filled", pojo.getPostCode());
+		Assert.assertEquals(
+				PodamTestConstants.POST_CODE, pojo.getPostCode());
+	}
 
 	@Test
 	public void testPodamExcludeAnnotation() {
