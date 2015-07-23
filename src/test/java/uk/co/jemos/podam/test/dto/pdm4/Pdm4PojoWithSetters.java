@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.jemos.podam.common.PodamConstructor;
+import uk.co.jemos.podam.annotation.PodamConstructor;
 
 /**
  * Pojo to test to test multiple constructors and setters

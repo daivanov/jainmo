@@ -1,6 +1,6 @@
 package uk.co.jemos.podam.test.unit.issue86;
 
-import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.annotation.PodamExclude;
 
 import java.io.Serializable;
 

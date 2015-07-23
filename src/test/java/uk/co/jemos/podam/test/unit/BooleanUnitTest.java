@@ -4,11 +4,12 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import uk.co.jemos.podam.annotation.PodamExclude;
 import uk.co.jemos.podam.api.DefaultClassInfoStrategy;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.api.RandomDataProviderStrategy;
-import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.test.dto.BooleanPojo;
 import uk.co.jemos.podam.test.dto.SimplePojoWithExcludeAnnotationToTestSetters.TestExclude;
 

@@ -3,8 +3,8 @@
  */
 package uk.co.jemos.podam.api;
 
+import uk.co.jemos.podam.annotation.PodamCollection;
 import uk.co.jemos.podam.common.AttributeStrategy;
-import uk.co.jemos.podam.common.PodamCollection;
 
 /**
  * A default Object strategy, just to provide a default to

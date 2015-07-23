@@ -5,9 +5,9 @@ package uk.co.jemos.podam.test.dto.docs.example;
 
 import java.io.Serializable;
 
-import uk.co.jemos.podam.common.PodamConstructor;
-import uk.co.jemos.podam.common.PodamDoubleValue;
-import uk.co.jemos.podam.common.PodamIntValue;
+import uk.co.jemos.podam.annotation.PodamConstructor;
+import uk.co.jemos.podam.annotation.PodamDoubleValue;
+import uk.co.jemos.podam.annotation.PodamIntValue;
 
 /**
  * @author mtedone

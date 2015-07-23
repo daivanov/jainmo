@@ -5,6 +5,8 @@ package uk.co.jemos.podam.common;
 
 import java.lang.reflect.Method;
 
+import uk.co.jemos.podam.annotation.PodamConstructor;
+
 /**
  * It provides a comparator to sort the constructor to choose first.
  * <p>

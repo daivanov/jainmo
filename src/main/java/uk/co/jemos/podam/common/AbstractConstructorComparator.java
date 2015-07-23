@@ -7,6 +7,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.Comparator;
 
+import uk.co.jemos.podam.annotation.PodamConstructor;
+
 /**
  * It provides a comparator to sort the constructor to choose first.
  * <p>

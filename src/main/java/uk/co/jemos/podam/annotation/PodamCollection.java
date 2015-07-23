@@ -1,7 +1,7 @@
 /**
  * 
  */
-package uk.co.jemos.podam.common;
+package uk.co.jemos.podam.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,6 +10,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import uk.co.jemos.podam.api.ObjectStrategy;
+import uk.co.jemos.podam.common.AttributeStrategy;
+import uk.co.jemos.podam.common.PodamConstants;
 
 /**
  * Annotation used to customise collection-type elements

@@ -5,7 +5,8 @@ package uk.co.jemos.podam.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.co.jemos.podam.common.PodamExclude;
+
+import uk.co.jemos.podam.annotation.PodamExclude;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

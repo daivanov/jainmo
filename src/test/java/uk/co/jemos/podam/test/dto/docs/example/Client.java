@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import uk.co.jemos.podam.common.PodamCollection;
-import uk.co.jemos.podam.common.PodamStringValue;
+import uk.co.jemos.podam.annotation.PodamCollection;
+import uk.co.jemos.podam.annotation.PodamStringValue;
 
 /**
  * @author mtedone

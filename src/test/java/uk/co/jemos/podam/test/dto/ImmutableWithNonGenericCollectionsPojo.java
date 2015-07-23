@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
-import uk.co.jemos.podam.common.PodamCollection;
-import uk.co.jemos.podam.common.PodamConstructor;
+import uk.co.jemos.podam.annotation.PodamCollection;
+import uk.co.jemos.podam.annotation.PodamConstructor;
 
 /**
  * @author mtedone

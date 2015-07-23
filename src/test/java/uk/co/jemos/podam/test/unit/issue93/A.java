@@ -1,6 +1,6 @@
 package uk.co.jemos.podam.test.unit.issue93;
 
-import uk.co.jemos.podam.common.PodamCollection;
+import uk.co.jemos.podam.annotation.PodamCollection;
 
 import java.util.List;
 
