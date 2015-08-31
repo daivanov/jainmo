@@ -78,6 +78,12 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	private final Map<Class<?>, Class<?>> specificTypes = new ConcurrentHashMap<Class<?>, Class<?>>();
 
 	/**
+	 * A list of user-submitted specific implementations for interfaces and
+	 * abstract classes
+	 */
+	private final Map<Class<?>, Class<?>> factoryTypes = new ConcurrentHashMap<Class<?>, Class<?>>();
+
+	/**
 	 * Mapping between annotations and attribute strategies
 	 */
 	private final Map<Class<? extends Annotation>, Class<AttributeStrategy<?>>> attributeStrategies
@@ -519,7 +525,52 @@ public abstract class AbstractRandomDataProviderStrategy implements DataProvider
 	}
 
 	/**
-	 * Bind an interface/abstract class to a specific implementation. If the
+	 * Binds an interface/abstract class to its factory. If the
+	 * strategy previously contained a binding for the interface/abstract class,
+	 * the old value is replaced by the new value. If you want to implement
+	 * more sophisticated binding strategy, override this class.
+	 *
+	 * @param <T> return type
+	 * @param abstractClass
+	 *            the interface/abstract class to bind
+	 * @param factoryClass
+	 *            factory class for instantiation of
+	 *            {@code abstractClass}.
+	 * @return itself
+	 */
+	public <T> AbstractRandomDataProviderStrategy addFactory(
+			final Class<T> abstractClass, final Class<?> factoryClass) {
+
+		factoryTypes.put(abstractClass, factoryClass);
+		return this;
+	}
+
+	/**
+	 * Remove binding of an interface/abstract class to its factory
+	 *
+	 * @param <T> return type
+	 * @param abstractClass
+	 *            the interface/abstract class to remove binding
+	 * @return itself
+	 */
+	public <T> AbstractRandomDataProviderStrategy removeFactory(
+			final Class<T> abstractClass) {
+
+		factoryTypes.remove(abstractClass);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Class<?> getFactoryClass(Class<?> nonInstantiatableClass) {
+
+		return factoryTypes.get(nonInstantiatableClass);
+	}
+
+	/**
+	 * Binds an interface/abstract class to a specific implementation. If the
 	 * strategy previously contained a binding for the interface/abstract class,
 	 * the old value is replaced by the new value. If you want to implement
 	 * more sophisticated binding strategy, override this class.
