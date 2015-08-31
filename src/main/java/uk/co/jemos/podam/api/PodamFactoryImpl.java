@@ -591,7 +591,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				PodamByteValue intStrategy = (PodamByteValue) annotation;
 
 				String numValueStr = intStrategy.numValue();
-				if (null != numValueStr && !"".equals(numValueStr)) {
+				if (null != numValueStr && !numValueStr.isEmpty()) {
 					try {
 
 						retValue = Byte.valueOf(numValueStr);
@@ -656,7 +656,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				PodamShortValue shortStrategy = (PodamShortValue) annotation;
 
 				String numValueStr = shortStrategy.numValue();
-				if (null != numValueStr && !"".equals(numValueStr)) {
+				if (null != numValueStr && !numValueStr.isEmpty()) {
 					try {
 						retValue = Short.valueOf(numValueStr);
 					} catch (NumberFormatException nfe) {
@@ -774,7 +774,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				PodamIntValue intStrategy = (PodamIntValue) annotation;
 
 				String numValueStr = intStrategy.numValue();
-				if (null != numValueStr && !"".equals(numValueStr)) {
+				if (null != numValueStr && !numValueStr.isEmpty()) {
 					try {
 						retValue = Integer.valueOf(numValueStr);
 					} catch (NumberFormatException nfe) {
@@ -844,7 +844,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				PodamFloatValue floatStrategy = (PodamFloatValue) annotation;
 
 				String numValueStr = floatStrategy.numValue();
-				if (null != numValueStr && !"".equals(numValueStr)) {
+				if (null != numValueStr && !numValueStr.isEmpty()) {
 					try {
 						retValue = Float.valueOf(numValueStr);
 					} catch (NumberFormatException nfe) {
@@ -904,7 +904,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				PodamDoubleValue doubleStrategy = (PodamDoubleValue) annotation;
 
 				String numValueStr = doubleStrategy.numValue();
-				if (null != numValueStr && !"".equals(numValueStr)) {
+				if (null != numValueStr && !numValueStr.isEmpty()) {
 
 					try {
 						retValue = Double.valueOf(numValueStr);
@@ -971,7 +971,7 @@ public class PodamFactoryImpl implements PodamFactory {
 				PodamLongValue longStrategy = (PodamLongValue) annotation;
 
 				String numValueStr = longStrategy.numValue();
-				if (null != numValueStr && !"".equals(numValueStr)) {
+				if (null != numValueStr && !numValueStr.isEmpty()) {
 					try {
 						retValue = Long.valueOf(numValueStr);
 					} catch (NumberFormatException nfe) {
