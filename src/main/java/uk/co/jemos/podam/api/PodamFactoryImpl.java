@@ -1584,7 +1584,9 @@ public class PodamFactoryImpl implements PodamFactory {
 
 		Class<?> pojoClass = (pojo instanceof Class ? (Class<?>) pojo : pojo.getClass());
 		Class<?> realAttributeType;
-		if (Object.class.equals(attributeType) && attributeType != genericAttributeType) {
+		if (attributeType != genericAttributeType
+				&& Object.class.equals(attributeType)
+				&& genericAttributeType instanceof TypeVariable) {
 			AtomicReference<Type[]> elementGenericTypeArgs
 					= new AtomicReference<Type[]>(NO_TYPES);
 			realAttributeType = resolveGenericParameter(genericAttributeType,
@@ -1592,8 +1594,18 @@ public class PodamFactoryImpl implements PodamFactory {
 		} else {
 			realAttributeType = attributeType;
 		}
+
+		TypeVariable<?>[] typeParams = attributeType.getTypeParameters();
+		Type[] genericTypeArgsAll;
+		if (typeParams.length > genericTypeArgs.length) {
+			genericTypeArgsAll = mergeActualAndSuppliedGenericTypes(
+					typeParams, genericAttributeType, genericTypeArgs, typeArgsMap);
+		} else {
+			genericTypeArgsAll = genericTypeArgs;
+		}
+
 		AttributeMetadata attributeMetadata = new AttributeMetadata(
-				attributeName, realAttributeType, genericTypeArgs, annotations,
+				attributeName, realAttributeType, genericTypeArgsAll, annotations,
 				pojoClass);
 
 		// Primitive type
@@ -1621,13 +1633,13 @@ public class PodamFactoryImpl implements PodamFactory {
 
 			attributeValue = resolveCollectionValueWhenCollectionIsPojoAttribute(
 					pojo, manufacturingCtx, realAttributeType, attributeName,
-					annotations, typeArgsMap, genericTypeArgs);
+					annotations, typeArgsMap, genericTypeArgsAll);
 
 		} else if (Map.class.isAssignableFrom(realAttributeType)) {
 
 			attributeValue = resolveMapValueWhenMapIsPojoAttribute(pojo,
 					manufacturingCtx, realAttributeType, attributeName, annotations,
-					typeArgsMap, genericTypeArgs);
+					typeArgsMap, genericTypeArgsAll);
 
 		} else if (realAttributeType.isEnum()) {
 
@@ -1662,17 +1674,13 @@ public class PodamFactoryImpl implements PodamFactory {
 			} else {
 				LOG.error("{} is missing generic type argument, supplied {} {}",
 						genericAttributeType, typeArgsMap,
-						Arrays.toString(genericTypeArgs));
+						Arrays.toString(genericTypeArgsAll));
 			}
 
 		}
 
 		// For any other type, we use the PODAM strategy
 		if (attributeValue == null) {
-
-			TypeVariable<?>[] typeParams = attributeType.getTypeParameters();
-			Type[] genericTypeArgsAll = mergeActualAndSuppliedGenericTypes(
-					typeParams, genericTypeArgs, typeArgsMap);
 
 			Integer depth = manufacturingCtx.getPojos().get(realAttributeType);
 			if (depth == null) {
@@ -1732,6 +1740,8 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *
 	 * @param actualTypes
 	 *            an array of types used for field or POJO declaration 
+	 * @param genericAttributeType
+	 *            generic type of object
 	 * @param suppliedTypes
 	 *            an array of supplied types for generic type substitution 
 	 * @param typeArgsMap
@@ -1741,8 +1751,20 @@ public class PodamFactoryImpl implements PodamFactory {
 	 *            resolved
 	 */
 	private Type[] mergeActualAndSuppliedGenericTypes(
-			Type[] actualTypes, Type[] suppliedTypes,
+			Type[] actualTypes, Type genericAttributeType, Type[] suppliedTypes,
 			Map<String, Type> typeArgsMap) {
+
+		Type[] genericTypes = null;
+		if (genericAttributeType instanceof ParameterizedType) {
+			ParameterizedType paramType = (ParameterizedType) genericAttributeType;
+			genericTypes = paramType.getActualTypeArguments();
+		} else if (genericAttributeType instanceof WildcardType) {
+			WildcardType wildcardType = (WildcardType) genericAttributeType;
+			genericTypes = wildcardType.getLowerBounds();
+			if ((genericTypes == null) || (genericTypes.length == 0)) {
+				genericTypes = wildcardType.getUpperBounds();
+			}
+		}
 
 		List<Type> resolvedTypes = new ArrayList<Type>();
 		List<Type> substitutionTypes = new ArrayList<Type>(Arrays.asList(suppliedTypes));
@@ -1758,6 +1780,16 @@ public class PodamFactoryImpl implements PodamFactory {
 						= new AtomicReference<Type[]>(NO_TYPES);
 				type = resolveGenericParameter(actualTypes[i], typeArgsMap,
 						methodGenericTypeArgs);
+			}
+			if ((type == null) && (genericTypes != null)) {
+				if (genericTypes[i] instanceof Class) {
+					type = genericTypes[i];
+				} else if (genericTypes[i] instanceof WildcardType) {
+					AtomicReference<Type[]> methodGenericTypeArgs
+						= new AtomicReference<Type[]>(NO_TYPES);
+						type = resolveGenericParameter(genericTypes[i], typeArgsMap,
+								methodGenericTypeArgs);
+				}
 			}
 			if (type != null) {
 				resolvedTypes.add(type);
