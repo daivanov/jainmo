@@ -1229,16 +1229,12 @@ public class PodamFactoryImpl implements PodamFactory {
 					new AttributeMetadata(pojoClass, genericTypeArgs, pojoClass));
 		}
 
+		Class<T> specificClass = null;
 		if (pojoClass.isInterface()) {
-			Class<T> specificClass = (Class<T>) strategy
-					.getSpecificClass(pojoClass);
+			specificClass = (Class<T>) strategy.getSpecificClass(pojoClass);
 			if (!specificClass.equals(pojoClass)) {
 				return this.manufacturePojoInternal(specificClass, pojoMetadata,
 						manufacturingCtx, genericTypeArgs);
-			} else {
-				return resortToExternalFactory(manufacturingCtx,
-						"{} is an interface. Resorting to {} external factory",
-						pojoClass, genericTypeArgs);
 			}
 		}
 
@@ -1257,8 +1253,9 @@ public class PodamFactoryImpl implements PodamFactory {
 
 		if (retValue == null) {
 			if (Modifier.isAbstract(pojoClass.getModifiers())) {
-				Class<T> specificClass = (Class<T>) strategy
-						.getSpecificClass(pojoClass);
+				if (specificClass == null) {
+					specificClass = (Class<T>) strategy.getSpecificClass(pojoClass);
+				}
 				if (!specificClass.equals(pojoClass)) {
 					return this.manufacturePojoInternal(specificClass, pojoMetadata,
 							manufacturingCtx, genericTypeArgs);
@@ -1267,14 +1264,13 @@ public class PodamFactoryImpl implements PodamFactory {
 			return resortToExternalFactory(manufacturingCtx,
 					"Failed to manufacture {}. Resorting to {} external factory",
 					pojoClass, genericTypeArgs);
-		}
+		} else {
 
-		// update memoization cache with new object
-		// the reference is stored before properties are set so that recursive
-		// properties can use it
-		strategy.cacheMemoizedObject(pojoMetadata, retValue);
+			// update memoization cache with new object
+			// the reference is stored before properties are set so that recursive
+			// properties can use it
+			strategy.cacheMemoizedObject(pojoMetadata, retValue);
 
-		if (retValue != null) {
 			populatePojoInternal(retValue, manufacturingCtx, typeArgsMap, genericTypeArgsExtra);
 		}
 
