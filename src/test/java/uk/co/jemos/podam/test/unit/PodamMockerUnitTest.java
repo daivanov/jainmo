@@ -38,6 +38,8 @@ import uk.co.jemos.podam.test.dto.pdm6.RecursiveMap;
 import uk.co.jemos.podam.test.enums.ExternalRatePodamEnum;
 
 import javax.activation.DataHandler;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -85,6 +87,19 @@ public class PodamMockerUnitTest {
 		// exception
 		AbstractTestPojo pojo = factory.manufacturePojo(AbstractTestPojo.class);
 		Assert.assertNull("The abstract pojo should be null!", pojo);
+	}
+
+	@Test
+	public void testMockerForAbstractClassWithFactory() {
+		strategy.setMemoization(false);
+		// Trying to create an abstract class with a factory class
+		// implementation should be fine
+		strategy.addFactory(Transformer.class, TransformerFactory.class);
+		Transformer pojo = factory.manufacturePojo(Transformer.class);
+		Assert.assertNotNull(
+				"The abstract pojo should not be null since a factory has been specified",
+				pojo);
+		strategy.removeFactory(Transformer.class);
 	}
 
 	@Test
