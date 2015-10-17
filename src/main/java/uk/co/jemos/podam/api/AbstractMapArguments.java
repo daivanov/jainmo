@@ -14,7 +14,7 @@ public abstract class AbstractMapArguments {
 	/** The name of map attribute in enclosing POJO */
 	private String attributeName;
 	/** The Map to be returned. */
-	private Map<? super Object, ? super Object> mapToBeFilled;
+	private Map<Object, Object> mapToBeFilled;
 	/** The annotations for the attribute. */
 	private Annotation[] annotations;
 
@@ -36,7 +36,7 @@ public abstract class AbstractMapArguments {
 	/**
 	 * @return the mapToBeFilled
 	 */
-	public Map<? super Object, ? super Object> getMapToBeFilled() {
+	public Map<Object, Object> getMapToBeFilled() {
 		return mapToBeFilled;
 	}
 
@@ -45,7 +45,7 @@ public abstract class AbstractMapArguments {
 	 *            the mapToBeFilled to set
 	 */
 	public void setMapToBeFilled(
-			Map<? super Object, ? super Object> mapToBeFilled) {
+			Map<Object, Object> mapToBeFilled) {
 		this.mapToBeFilled = mapToBeFilled;
 	}
 
