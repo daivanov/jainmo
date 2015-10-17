@@ -3,6 +3,7 @@ package uk.co.jemos.podam.test.unit;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import org.powermock.api.mockito.PowerMockito;
 
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -38,6 +39,7 @@ import uk.co.jemos.podam.test.dto.pdm6.RecursiveMap;
 import uk.co.jemos.podam.test.enums.ExternalRatePodamEnum;
 
 import javax.activation.DataHandler;
+import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
@@ -100,6 +102,19 @@ public class PodamMockerUnitTest {
 				"The abstract pojo should not be null since a factory has been specified",
 				pojo);
 		strategy.removeFactory(Transformer.class);
+	}
+
+	@Test
+	public void testMockerForAbstractClassWithStaticFactory() {
+		strategy.setMemoization(false);
+		// Trying to create an abstract class with a static factory class
+		// implementation should be fine
+		strategy.addFactory(SOAPMessage.class, PowerMockito.class);
+		SOAPMessage pojo = factory.manufacturePojo(SOAPMessage.class);
+		Assert.assertNotNull(
+				"The abstract pojo should not be null since a factory has been specified",
+				pojo);
+		strategy.removeFactory(SOAPMessage.class);
 	}
 
 	@Test
