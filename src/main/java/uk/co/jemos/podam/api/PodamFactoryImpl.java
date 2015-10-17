@@ -433,35 +433,42 @@ public class PodamFactoryImpl implements PodamFactory {
 		// A candidate factory method is a method which returns the
 		// Class type
 
-		// The parameters to pass to the method invocation
-		Object[] parameterValues = null;
-
+		Object factoryInstance = null;
 		for (Method candidateConstructor : declaredMethods) {
 
-			if (!candidateConstructor.getReturnType().equals(pojoClass)) {
+			if (!candidateConstructor.getReturnType().isAssignableFrom(pojoClass)) {
 				continue;
 			}
 
-			Object factoryInstance = null;
 			if (!Modifier.isStatic(candidateConstructor.getModifiers())) {
 				if (factoryClass.equals(pojoClass)) {
 					continue;
-				} else {
+				} else if (factoryInstance == null) {
 					factoryInstance = manufacturePojo(factoryClass);
 				}
 			}
 
-			parameterValues = getParameterValuesForMethod(candidateConstructor,
+			LOG.trace("Trying factory method "+ candidateConstructor);
+
+			// The parameters to pass to the method invocation
+			Object[] parameterValues = getParameterValuesForMethod(candidateConstructor,
 					pojoClass, manufacturingCtx, typeArgsMap, genericTypeArgs);
+			for (int i = 0; i < parameterValues.length; i++) {
+				if (parameterValues[i] instanceof Class) {
+					parameterValues[i] = pojoClass;
+				}
+			}
 
 			try {
 
-				@SuppressWarnings("unchecked")
-				T retValue = (T) candidateConstructor.invoke(factoryInstance,
+				Object result = candidateConstructor.invoke(factoryInstance,
 						parameterValues);
-				LOG.debug("Could create an instance using "
-						+ candidateConstructor);
-				if (retValue != null) {
+				if (result != null && pojoClass.isAssignableFrom(result.getClass())) {
+
+					LOG.debug("Could create an instance using "
+							+ candidateConstructor);
+					@SuppressWarnings("unchecked")
+					T retValue = (T) result;
 					return retValue;
 				}
 
