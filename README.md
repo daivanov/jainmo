@@ -1,10 +1,10 @@
-podam
-=====
+JOInMo
+======
 
-PODAM - POjo DAta Mocker
+JOInMo - Java Object Instantiation and Mocking
 
-Podam (http://mtedone.github.io/podam/) is a Java testing tool which auto-fills POJOs with made-up data.
+JOInMo is a Java library which helps to instaniate and mock Java objects automatically.
 
-Podam can fill any tree of objects with data. It supports generics, collections, arrays and Java native types. 
+JOInMo can fill any tree of objects with data. It supports generics, collections, arrays and Java native types. 
 
-To get an idea of Podam's full potential, please visit the Podam website.
+To get an idea of JOInMo's full potential, please visit the JOInMo wiki (https://github.com/daivanov/joinmo/wiki).
