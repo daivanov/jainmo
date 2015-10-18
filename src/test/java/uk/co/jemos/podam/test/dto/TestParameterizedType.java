@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
  * @author marciocarmona
  * 
  */
-public class PodamParameterizedType implements ParameterizedType {
+public class TestParameterizedType implements ParameterizedType {
 
 	private final Class<?> rawType;
 	private final Type[] actualTypeArguments;
@@ -23,9 +23,8 @@ public class PodamParameterizedType implements ParameterizedType {
 	 * @param actualTypeArguments
 	 *            the type arguments
 	 */
-	public PodamParameterizedType(final Class<?> rawType,
+	public TestParameterizedType(final Class<?> rawType,
 			final Type... actualTypeArguments) {
-		super();
 		this.rawType = rawType;
 		this.actualTypeArguments = actualTypeArguments;
 	}

@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 import uk.co.jemos.podam.common.AttributeStrategy;
 import uk.co.jemos.podam.exceptions.PodamMockeryException;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 /**
  * @author mtedone
@@ -23,7 +23,7 @@ public class MyBirthdayStrategy implements AttributeStrategy<Calendar> {
 	 */
 	public Calendar getValue() throws PodamMockeryException {
 
-		Calendar myBirthday = PodamTestUtils.getMyBirthday();
+		Calendar myBirthday = TestUtils.getMyBirthday();
 
 		return myBirthday;
 	}

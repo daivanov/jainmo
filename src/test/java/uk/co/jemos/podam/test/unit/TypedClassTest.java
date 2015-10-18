@@ -6,7 +6,7 @@ import org.junit.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.test.dto.TypedClassPojo2;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 /**
  * @author daivanov
@@ -23,6 +23,6 @@ public class TypedClassTest {
 		Assert.assertNotNull(pojo.getTypedValue());
 		Assert.assertEquals("Invalid value type",
 				String.class, pojo.getTypedValue().getClass());
-		PodamTestUtils.assertCollectionElementsType(pojo.getTypedList(), String.class);
+		TestUtils.assertCollectionElementsType(pojo.getTypedList(), String.class);
 	}
 }

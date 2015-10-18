@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamLongValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * @author mtedone
@@ -29,7 +29,7 @@ public class LongValuePojo implements Serializable {
 	@PodamLongValue(minValue = 0, maxValue = 1000)
 	private long longFieldWithMinAndMaxValue;
 
-	@PodamLongValue(numValue = PodamTestConstants.LONG_PRECISE_VALUE)
+	@PodamLongValue(numValue = TestConstants.LONG_PRECISE_VALUE)
 	private long longFieldWithPreciseValue;
 
 	@PodamLongValue(minValue = 0)
@@ -41,7 +41,7 @@ public class LongValuePojo implements Serializable {
 	@PodamLongValue(minValue = 0, maxValue = 1000)
 	private Long longObjectFieldWithMinAndMaxValue;
 
-	@PodamLongValue(numValue = PodamTestConstants.LONG_PRECISE_VALUE)
+	@PodamLongValue(numValue = TestConstants.LONG_PRECISE_VALUE)
 	private Long longObjectFieldWithPreciseValue;
 
 	// ------------------->> Constructors

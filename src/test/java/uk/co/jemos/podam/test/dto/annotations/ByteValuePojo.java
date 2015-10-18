@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamByteValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * @author mtedone
@@ -20,25 +20,25 @@ public class ByteValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamByteValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamByteValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private byte byteFieldWithMinValueOnly;
 
-	@PodamByteValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamByteValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private byte byteFieldWithMaxValueOnly;
 
-	@PodamByteValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamByteValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private byte byteFieldWithMinAndMaxValue;
 
-	@PodamByteValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamByteValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private Byte byteObjectFieldWithMinValueOnly;
 
-	@PodamByteValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamByteValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Byte byteObjectFieldWithMaxValueOnly;
 
-	@PodamByteValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamByteValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Byte byteObjectFieldWithMinAndMaxValue;
 
-	@PodamByteValue(numValue = PodamTestConstants.BYTE_PRECISE_VALUE)
+	@PodamByteValue(numValue = TestConstants.BYTE_PRECISE_VALUE)
 	private byte byteFieldWithPreciseValue;
 
 	// ------------------->> Constructors

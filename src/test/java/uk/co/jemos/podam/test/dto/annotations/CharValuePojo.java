@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamCharValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * POJO to test {@link PodamCharValue} annotation
@@ -22,28 +22,28 @@ public class CharValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamCharValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamCharValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private char charFieldWithMinValueOnly;
 
-	@PodamCharValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamCharValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private char charFieldWithMaxValueOnly;
 
-	@PodamCharValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamCharValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private char charFieldWithMinAndMaxValue;
 
 	@PodamCharValue(charValue = ' ')
 	private char charFieldWithBlankInPreciseValue;
 
-	@PodamCharValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamCharValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private Character charObjectFieldWithMinValueOnly;
 
-	@PodamCharValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamCharValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Character charObjectFieldWithMaxValueOnly;
 
-	@PodamCharValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamCharValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Character charObjectFieldWithMinAndMaxValue;
 
-	@PodamCharValue(charValue = PodamTestConstants.CHAR_PRECISE_VALUE)
+	@PodamCharValue(charValue = TestConstants.CHAR_PRECISE_VALUE)
 	private char charFieldWithPreciseValue;
 
 	// ------------------->> Constructors

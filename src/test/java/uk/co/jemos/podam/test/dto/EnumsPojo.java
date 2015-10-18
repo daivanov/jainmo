@@ -5,7 +5,7 @@ package uk.co.jemos.podam.test.dto;
 
 import java.io.Serializable;
 
-import uk.co.jemos.podam.test.enums.ExternalRatePodamEnum;
+import uk.co.jemos.podam.test.enums.ExternalRateEnum;
 
 /**
  * A Pojo using enums for instance attributes
@@ -23,7 +23,7 @@ public class EnumsPojo implements Serializable {
 
 	private RatePodamInternal ratePodamInternal;
 
-	private ExternalRatePodamEnum ratePodamExternal;
+	private ExternalRateEnum ratePodamExternal;
 
 	// ------------------->> Constructors
 
@@ -49,7 +49,7 @@ public class EnumsPojo implements Serializable {
 	/**
 	 * @return the ratePodamExternal
 	 */
-	public ExternalRatePodamEnum getRatePodamExternal() {
+	public ExternalRateEnum getRatePodamExternal() {
 		return ratePodamExternal;
 	}
 
@@ -57,7 +57,7 @@ public class EnumsPojo implements Serializable {
 	 * @param ratePodamExternal
 	 *            the ratePodamExternal to set
 	 */
-	public void setRatePodamExternal(ExternalRatePodamEnum ratePodamExternal) {
+	public void setRatePodamExternal(ExternalRateEnum ratePodamExternal) {
 		this.ratePodamExternal = ratePodamExternal;
 	}
 

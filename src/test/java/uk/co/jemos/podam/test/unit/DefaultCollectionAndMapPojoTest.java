@@ -7,7 +7,7 @@ import org.junit.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.test.dto.PojoWithCollectionAndMap;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 public class DefaultCollectionAndMapPojoTest {
 
@@ -18,17 +18,17 @@ public class DefaultCollectionAndMapPojoTest {
 		PojoWithCollectionAndMap pojo = factory.manufacturePojo(PojoWithCollectionAndMap.class);
 		assertNotNull(pojo);
 		assertNotNull(pojo.getList());
-		PodamTestUtils.assertCollectionElementsType(pojo.getList(), String.class);
+		TestUtils.assertCollectionElementsType(pojo.getList(), String.class);
 		assertNotNull(pojo.getMap());
-		PodamTestUtils.assertMapElementsType(pojo.getMap(), Integer.class, String.class);
+		TestUtils.assertMapElementsType(pojo.getMap(), Integer.class, String.class);
 		assertNotNull(pojo.getList2());
-		PodamTestUtils.assertCollectionElementsType(pojo.getList2(), String.class);
+		TestUtils.assertCollectionElementsType(pojo.getList2(), String.class);
 		assertNotNull(pojo.getMap2());
-		PodamTestUtils.assertMapElementsType(pojo.getMap2(), Integer.class, String.class);
+		TestUtils.assertMapElementsType(pojo.getMap2(), Integer.class, String.class);
 		assertNotNull(pojo.getList3());
-		PodamTestUtils.assertCollectionElementsType(pojo.getList3(), String.class);
+		TestUtils.assertCollectionElementsType(pojo.getList3(), String.class);
 		assertNotNull(pojo.getMap3());
-		PodamTestUtils.assertMapElementsType(pojo.getMap3(), Integer.class, String.class);
+		TestUtils.assertMapElementsType(pojo.getMap3(), Integer.class, String.class);
 	}
 
 }

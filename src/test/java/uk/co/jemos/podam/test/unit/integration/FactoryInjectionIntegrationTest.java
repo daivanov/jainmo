@@ -19,9 +19,8 @@ import uk.co.jemos.podam.test.dto.SimplePojoToTestSetters;
  * 
  */
 @ContextConfiguration(locations = {"classpath:podam-test-appContext.xml"})
-public class PodamFactoryInjectionIntegrationTest
-		extends
-			AbstractJUnit4SpringContextTests {
+public class FactoryInjectionIntegrationTest
+		extends AbstractJUnit4SpringContextTests {
 
 	// ------------------->> Constants
 

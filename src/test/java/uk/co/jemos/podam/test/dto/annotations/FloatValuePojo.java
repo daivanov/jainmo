@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamFloatValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * POJO to test the {@link PodamFloatValue} annotation
@@ -22,28 +22,28 @@ public class FloatValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamFloatValue(minValue = PodamTestConstants.NUMBER_FLOAT_MIN_VALUE)
+	@PodamFloatValue(minValue = TestConstants.NUMBER_FLOAT_MIN_VALUE)
 	private float floatFieldWithMinValueOnly;
 
-	@PodamFloatValue(maxValue = PodamTestConstants.NUMBER_FLOAT_ONE_HUNDRED)
+	@PodamFloatValue(maxValue = TestConstants.NUMBER_FLOAT_ONE_HUNDRED)
 	private float floatFieldWithMaxValueOnly;
 
-	@PodamFloatValue(minValue = PodamTestConstants.NUMBER_FLOAT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_FLOAT_MAX_VALUE)
+	@PodamFloatValue(minValue = TestConstants.NUMBER_FLOAT_MIN_VALUE, maxValue = TestConstants.NUMBER_FLOAT_MAX_VALUE)
 	private float floatFieldWithMinAndMaxValue;
 
-	@PodamFloatValue(numValue = PodamTestConstants.FLOAT_PRECISE_VALUE)
+	@PodamFloatValue(numValue = TestConstants.FLOAT_PRECISE_VALUE)
 	private float floatFieldWithPreciseValue;
 
-	@PodamFloatValue(minValue = PodamTestConstants.NUMBER_FLOAT_MIN_VALUE)
+	@PodamFloatValue(minValue = TestConstants.NUMBER_FLOAT_MIN_VALUE)
 	private Float floatObjectFieldWithMinValueOnly;
 
-	@PodamFloatValue(maxValue = PodamTestConstants.NUMBER_FLOAT_ONE_HUNDRED)
+	@PodamFloatValue(maxValue = TestConstants.NUMBER_FLOAT_ONE_HUNDRED)
 	private Float floatObjectFieldWithMaxValueOnly;
 
-	@PodamFloatValue(minValue = PodamTestConstants.NUMBER_FLOAT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_FLOAT_MAX_VALUE)
+	@PodamFloatValue(minValue = TestConstants.NUMBER_FLOAT_MIN_VALUE, maxValue = TestConstants.NUMBER_FLOAT_MAX_VALUE)
 	private Float floatObjectFieldWithMinAndMaxValue;
 
-	@PodamFloatValue(numValue = PodamTestConstants.FLOAT_PRECISE_VALUE)
+	@PodamFloatValue(numValue = TestConstants.FLOAT_PRECISE_VALUE)
 	private Float floatObjectFieldWithPreciseValue;
 
 	// ------------------->> Constructors

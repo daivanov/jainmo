@@ -5,7 +5,7 @@ import org.junit.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.test.dto.ArrayPojo;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 public class ArrayUnitTest {
 
@@ -15,8 +15,8 @@ public class ArrayUnitTest {
 		PodamFactory podam = new PodamFactoryImpl();
 		ArrayPojo pojo = podam.manufacturePojo(ArrayPojo.class);
 
-		PodamTestUtils.assertArrayElementsType(pojo.getMyStringArray(), String.class);
-		PodamTestUtils.assertArrayElementsType(pojo.getMyObjectArray(), Object.class);
+		TestUtils.assertArrayElementsType(pojo.getMyStringArray(), String.class);
+		TestUtils.assertArrayElementsType(pojo.getMyObjectArray(), Object.class);
 	}
 
 }

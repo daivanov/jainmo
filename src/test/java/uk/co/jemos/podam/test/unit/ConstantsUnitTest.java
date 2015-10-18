@@ -10,7 +10,7 @@ import java.lang.reflect.Constructor;
 /**
  * Created by tedonema on 06/05/2015.
  */
-public class PodamConstantsUnitTest {
+public class ConstantsUnitTest {
 
     @Test
     public void testNonInstantiableClass() {

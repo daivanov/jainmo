@@ -3,7 +3,7 @@
  */
 package uk.co.jemos.podam.test.dto;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Test pojo
@@ -15,5 +15,5 @@ import java.util.Map;
  * 
  */
 @SuppressWarnings("rawtypes")
-public interface PodamRawMap extends Map {
+public interface RawList extends List {
 }

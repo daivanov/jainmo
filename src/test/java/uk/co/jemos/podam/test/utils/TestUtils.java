@@ -17,7 +17,7 @@ import org.junit.Assert;
  * @author mtedone
  * 
  */
-public class PodamTestUtils {
+public class TestUtils {
 
 	// ------------------->> Constants
 
@@ -26,7 +26,7 @@ public class PodamTestUtils {
 	// ------------------->> Constructors
 
 	/** Non instantiable class */
-	private PodamTestUtils() {
+	private TestUtils() {
 	}
 
 	// ------------------->> Public methods

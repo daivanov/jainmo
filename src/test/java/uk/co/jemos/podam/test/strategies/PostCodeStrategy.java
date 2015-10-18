@@ -5,7 +5,7 @@ package uk.co.jemos.podam.test.strategies;
 
 import uk.co.jemos.podam.common.AttributeStrategy;
 import uk.co.jemos.podam.exceptions.PodamMockeryException;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * A test strategy to manufacture UK-like post codes.
@@ -29,7 +29,7 @@ public class PostCodeStrategy implements AttributeStrategy<String> {
 	 * {@inheritDoc}
 	 */
 	public String getValue() throws PodamMockeryException {
-		return PodamTestConstants.POST_CODE;
+		return TestConstants.POST_CODE;
 	}
 
 	// ------------------->> Constructors

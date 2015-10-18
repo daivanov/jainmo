@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class MapIndirectRawImplPojo implements PodamRawMap {
+public class MapIndirectRawImplPojo implements RawMap {
 
 	private Map<Object, Object> map = new HashMap<Object, Object>();
 

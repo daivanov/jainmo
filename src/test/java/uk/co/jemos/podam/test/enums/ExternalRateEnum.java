@@ -9,7 +9,7 @@ package uk.co.jemos.podam.test.enums;
  * @author mtedone
  * 
  */
-public enum ExternalRatePodamEnum {
+public enum ExternalRateEnum {
 
 	EXTERNAL_COOL, EXTERNAL_ROCKS, EXTERNAL_SUPERCOOL
 

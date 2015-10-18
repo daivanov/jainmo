@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import uk.co.jemos.podam.annotation.PodamCollection;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * @author mtedone
@@ -24,15 +24,15 @@ public class CollectionAnnotationPojo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// ------------------->> Instance / Static variables
 
-	@PodamCollection(nbrElements = PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS)
+	@PodamCollection(nbrElements = TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS)
 	/** A collection with a specified number of elements */
 	private List<String> strList = new ArrayList<String>();
 
-	@PodamCollection(nbrElements = PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS)
+	@PodamCollection(nbrElements = TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS)
 	/** An array with a specified number of elements */
-	private String[] strArray = new String[PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS];
+	private String[] strArray = new String[TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS];
 
-	@PodamCollection(nbrElements = PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS)
+	@PodamCollection(nbrElements = TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS)
 	/** A Map with a specified number of elements */
 	private Map<String, String> stringMap = new HashMap<String, String>();
 

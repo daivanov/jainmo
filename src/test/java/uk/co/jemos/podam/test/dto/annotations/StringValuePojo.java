@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamStringValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * POJO to test the {@link PodamStringValue}
@@ -22,11 +22,11 @@ public class StringValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamStringValue(length = PodamTestConstants.STR_ANNOTATION_TWENTY_LENGTH)
+	@PodamStringValue(length = TestConstants.STR_ANNOTATION_TWENTY_LENGTH)
 	/** A String attribute with length 20 */
 	private String twentyLengthString;
 
-	@PodamStringValue(strValue = PodamTestConstants.STR_ANNOTATION_PRECISE_VALUE)
+	@PodamStringValue(strValue = TestConstants.STR_ANNOTATION_PRECISE_VALUE)
 	private String preciseValueString;
 
 	// ------------------->> Constructors

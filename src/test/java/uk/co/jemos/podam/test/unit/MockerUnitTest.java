@@ -35,7 +35,7 @@ import uk.co.jemos.podam.test.dto.pdm6.Child;
 import uk.co.jemos.podam.test.dto.pdm6.Parent;
 import uk.co.jemos.podam.test.dto.pdm6.RecursiveList;
 import uk.co.jemos.podam.test.dto.pdm6.RecursiveMap;
-import uk.co.jemos.podam.test.enums.ExternalRatePodamEnum;
+import uk.co.jemos.podam.test.enums.ExternalRateEnum;
 
 import javax.activation.DataHandler;
 
@@ -48,7 +48,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Unit test for simple App.
  */
-public class PodamMockerUnitTest {
+public class MockerUnitTest {
 
 	/** The podam factory */
 	private static final PodamFactory factory = new PodamFactoryImpl();
@@ -649,7 +649,7 @@ public class PodamMockerUnitTest {
 		EnumsPojo pojo = factory.manufacturePojo(EnumsPojo.class);
 		Assert.assertNotNull("The pojo cannot be null!", pojo);
 
-		ExternalRatePodamEnum ratePodamExternal = pojo.getRatePodamExternal();
+		ExternalRateEnum ratePodamExternal = pojo.getRatePodamExternal();
 		Assert.assertNotNull("The external enum attribute cannot be null!",
 				ratePodamExternal);
 
@@ -664,8 +664,8 @@ public class PodamMockerUnitTest {
 	@Test
 	public void testEnumPojo() {
 
-		ExternalRatePodamEnum pojo = factory
-				.manufacturePojo(ExternalRatePodamEnum.class);
+		ExternalRateEnum pojo = factory
+				.manufacturePojo(ExternalRateEnum.class);
 		Assert.assertNotNull("The pojo cannot be null!", pojo);
 	}
 

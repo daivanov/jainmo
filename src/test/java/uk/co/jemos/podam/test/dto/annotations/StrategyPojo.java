@@ -24,7 +24,7 @@ import uk.co.jemos.podam.test.strategies.PostCodeStrategy;
  * @author mtedone
  * 
  */
-public class PodamStrategyPojo implements Serializable {
+public class StrategyPojo implements Serializable {
 
 	// ------------------->> Constants
 	private static final long serialVersionUID = 1L;
@@ -64,7 +64,7 @@ public class PodamStrategyPojo implements Serializable {
 
 	// ------------------->> Constructors
 
-	public PodamStrategyPojo(@PodamStrategyValue(PostCodeStrategy.class) String postCode3) {
+	public StrategyPojo(@PodamStrategyValue(PostCodeStrategy.class) String postCode3) {
 		this.postCode3 = postCode3;
 	}
 

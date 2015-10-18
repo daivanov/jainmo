@@ -10,7 +10,7 @@ import org.junit.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.api.RandomDataProviderStrategy;
-import uk.co.jemos.podam.test.dto.PodamParameterizedType;
+import uk.co.jemos.podam.test.dto.TestParameterizedType;
 import uk.co.jemos.podam.test.dto.pdm45.GenericAttributePojo;
 import uk.co.jemos.podam.test.dto.pdm45.GenericPojo;
 import uk.co.jemos.podam.test.dto.pdm45.MultiDimensionalConstructorPojo;
@@ -102,11 +102,11 @@ public class Pdm45UnitTest {
 	@SuppressWarnings("unchecked")
 	public void testMultiDimensionalPojoManufacture() {
 		ParameterizedType twoDimensionalStringListType =
-				new PodamParameterizedType(List.class, 
-						new PodamParameterizedType(List.class,
+				new TestParameterizedType(List.class, 
+						new TestParameterizedType(List.class,
 								String.class));
 		ParameterizedType longDoubleMapType =
-				new PodamParameterizedType(Map.class, Long.class, Double.class);
+				new TestParameterizedType(Map.class, Long.class, Double.class);
 		
 		final GenericPojo<List<List<String>>, Map<Long, Double>> pojo =
 				factory.manufacturePojo(GenericPojo.class, twoDimensionalStringListType, longDoubleMapType);

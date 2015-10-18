@@ -9,7 +9,7 @@ package uk.co.jemos.podam.test.utils;
  * @author mtedone
  * 
  */
-public class PodamTestConstants {
+public class TestConstants {
 
 	// ------------------->> Constants
 
@@ -78,7 +78,7 @@ public class PodamTestConstants {
 	// ------------------->> Constructors
 
 	/** Non instantiable class */
-	private PodamTestConstants() {
+	private TestConstants() {
 		throw new AssertionError();
 	}
 

@@ -12,7 +12,7 @@ import uk.co.jemos.podam.test.dto.ReadOnlyComplexTypesPojo;
 import uk.co.jemos.podam.test.dto.ReadOnlyGenericComplexTypesPojo;
 import uk.co.jemos.podam.test.dto.ReadOnlyRawFieldsPojo;
 import uk.co.jemos.podam.test.dto.ReadOnlyWildcardFieldsPojo;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 /**
  * @author daivanov
@@ -29,8 +29,8 @@ public class ReadOnlyComplexTypesTest {
 		Assert.assertNotNull("List should be present", pojo.getList());
 		Assert.assertNotNull("Map should be present", pojo.getMap());
 		Assert.assertNotNull("Complex element should be present", pojo.getValue());
-		PodamTestUtils.assertCollectionElementsType(pojo.getList(), Integer.class);
-		PodamTestUtils.assertMapElementsType(pojo.getMap(), Long.class, String.class);
+		TestUtils.assertCollectionElementsType(pojo.getList(), Integer.class);
+		TestUtils.assertMapElementsType(pojo.getMap(), Long.class, String.class);
 		Assert.assertNotNull("Complex element should not be empty",
 				pojo.getValue().getValue());
 	}
@@ -44,8 +44,8 @@ public class ReadOnlyComplexTypesTest {
 		Assert.assertNotNull("List should be present", pojo.getList());
 		Assert.assertNotNull("Map should be present", pojo.getMap());
 		Assert.assertNotNull("Complex element should be present", pojo.getValue());
-		PodamTestUtils.assertCollectionElementsType(pojo.getList(), Long.class);
-		PodamTestUtils.assertMapElementsType(pojo.getMap(), Integer.class, String.class);
+		TestUtils.assertCollectionElementsType(pojo.getList(), Long.class);
+		TestUtils.assertMapElementsType(pojo.getMap(), Integer.class, String.class);
 		Assert.assertNotNull("Complex element should not be empty",
 				pojo.getValue().getValue());
 		Assert.assertEquals("Wrong element type", Character.class,
@@ -63,8 +63,8 @@ public class ReadOnlyComplexTypesTest {
 		ReadOnlyWildcardFieldsPojo pojo
 				= factory.manufacturePojo(ReadOnlyWildcardFieldsPojo.class);
 		Assert.assertNotNull("Manufacturing failed", pojo);
-		PodamTestUtils.assertCollectionElementsType(pojo.getList(), Object.class);
-		PodamTestUtils.assertMapElementsType(pojo.getMap(), Object.class, Object.class);
+		TestUtils.assertCollectionElementsType(pojo.getList(), Object.class);
+		TestUtils.assertMapElementsType(pojo.getMap(), Object.class, Object.class);
 	}
 
 	@Test
@@ -72,8 +72,8 @@ public class ReadOnlyComplexTypesTest {
 		ReadOnlyRawFieldsPojo pojo
 				= factory.manufacturePojo(ReadOnlyRawFieldsPojo.class);
 		Assert.assertNotNull("Manufacturing failed", pojo);
-		PodamTestUtils.assertCollectionElementsType(pojo.getList(), Object.class);
-		PodamTestUtils.assertMapElementsType(pojo.getMap(), Object.class, Object.class);
+		TestUtils.assertCollectionElementsType(pojo.getList(), Object.class);
+		TestUtils.assertMapElementsType(pojo.getMap(), Object.class, Object.class);
 	}
 
 	@Test

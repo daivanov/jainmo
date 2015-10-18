@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamIntValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * POJO to test the {@link PodamIntValue} annotation
@@ -22,28 +22,28 @@ public class IntegerValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamIntValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamIntValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private int intFieldWithMinValueOnly;
 
-	@PodamIntValue(numValue = PodamTestConstants.INTEGER_PRECISE_VALUE)
+	@PodamIntValue(numValue = TestConstants.INTEGER_PRECISE_VALUE)
 	private int intFieldWithPreciseValue;
 
-	@PodamIntValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamIntValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private int intFieldWithMaxValueOnly;
 
-	@PodamIntValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_MAX_VALUE)
+	@PodamIntValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_MAX_VALUE)
 	private int intFieldWithMinAndMaxValue;
 
-	@PodamIntValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamIntValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private Integer integerObjectFieldWithMinValueOnly;
 
-	@PodamIntValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamIntValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Integer integerObjectFieldWithMaxValueOnly;
 
-	@PodamIntValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_MAX_VALUE)
+	@PodamIntValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_MAX_VALUE)
 	private Integer integerObjectFieldWithMinAndMaxValue;
 
-	@PodamIntValue(numValue = PodamTestConstants.INTEGER_PRECISE_VALUE)
+	@PodamIntValue(numValue = TestConstants.INTEGER_PRECISE_VALUE)
 	private Integer integerObjectFieldWithPreciseValue;
 
 	// ------------------->> Constructors

@@ -25,14 +25,14 @@ import uk.co.jemos.podam.test.dto.annotations.IntegerValuePojo;
 import uk.co.jemos.podam.test.dto.annotations.IntegerValueWithErrorPojo;
 import uk.co.jemos.podam.test.dto.annotations.LongValuePojo;
 import uk.co.jemos.podam.test.dto.annotations.LongValueWithErrorPojo;
-import uk.co.jemos.podam.test.dto.annotations.PodamStrategyPojo;
+import uk.co.jemos.podam.test.dto.annotations.StrategyPojo;
 import uk.co.jemos.podam.test.dto.annotations.ShortValuePojo;
 import uk.co.jemos.podam.test.dto.annotations.ShortValueWithErrorPojo;
 import uk.co.jemos.podam.test.dto.annotations.StringValuePojo;
 import uk.co.jemos.podam.test.dto.annotations.StringWithWrongStrategyTypePojo;
 import uk.co.jemos.podam.test.strategies.ByteArrayStrategy;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestConstants;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 public class AnnotationsUnitTest {
 
@@ -46,7 +46,7 @@ public class AnnotationsUnitTest {
 		Assert.assertNotNull(
 				"Field must be filled", pojo.getPostCode());
 		Assert.assertEquals(
-				PodamTestConstants.POST_CODE, pojo.getPostCode());
+				TestConstants.POST_CODE, pojo.getPostCode());
 	}
 
 	@Test
@@ -110,9 +110,9 @@ public class AnnotationsUnitTest {
 		int intFieldWithPreciseValue = pojo.getIntFieldWithPreciseValue();
 		Assert.assertTrue(
 				"The integer field with precise value must have a value of: "
-						+ PodamTestConstants.INTEGER_PRECISE_VALUE,
+						+ TestConstants.INTEGER_PRECISE_VALUE,
 						intFieldWithPreciseValue == Integer
-						.valueOf(PodamTestConstants.INTEGER_PRECISE_VALUE));
+						.valueOf(TestConstants.INTEGER_PRECISE_VALUE));
 
 		Integer integerObjectFieldWithPreciseValue = pojo
 				.getIntegerObjectFieldWithPreciseValue();
@@ -121,9 +121,9 @@ public class AnnotationsUnitTest {
 				integerObjectFieldWithPreciseValue);
 		Assert.assertTrue(
 				"The integer object field with precise value should have a value of "
-						+ PodamTestConstants.INTEGER_PRECISE_VALUE,
+						+ TestConstants.INTEGER_PRECISE_VALUE,
 						integerObjectFieldWithPreciseValue.intValue() == Integer
-						.valueOf(PodamTestConstants.INTEGER_PRECISE_VALUE));
+						.valueOf(TestConstants.INTEGER_PRECISE_VALUE));
 
 	}
 
@@ -183,9 +183,9 @@ public class AnnotationsUnitTest {
 		long longFieldWithPreciseValue = pojo.getLongFieldWithPreciseValue();
 		Assert.assertTrue(
 				"The long field with precise value must have a value of "
-						+ PodamTestConstants.LONG_PRECISE_VALUE,
+						+ TestConstants.LONG_PRECISE_VALUE,
 						longFieldWithPreciseValue == Long
-						.valueOf(PodamTestConstants.LONG_PRECISE_VALUE));
+						.valueOf(TestConstants.LONG_PRECISE_VALUE));
 
 		Long longObjectFieldWithPreciseValue = pojo
 				.getLongObjectFieldWithPreciseValue();
@@ -194,9 +194,9 @@ public class AnnotationsUnitTest {
 				longObjectFieldWithPreciseValue);
 		Assert.assertTrue(
 				"The long object field with precise value must have a value of "
-						+ PodamTestConstants.LONG_PRECISE_VALUE,
+						+ TestConstants.LONG_PRECISE_VALUE,
 						longObjectFieldWithPreciseValue.longValue() == Long.valueOf(
-								PodamTestConstants.LONG_PRECISE_VALUE).longValue());
+								TestConstants.LONG_PRECISE_VALUE).longValue());
 
 	}
 
@@ -213,20 +213,20 @@ public class AnnotationsUnitTest {
 		byte byteFieldWithMinValueOnly = pojo.getByteFieldWithMinValueOnly();
 		Assert.assertTrue(
 				"The byte field with min value only should have a minimum value of zero!",
-				byteFieldWithMinValueOnly >= PodamTestConstants.NUMBER_INT_MIN_VALUE);
+				byteFieldWithMinValueOnly >= TestConstants.NUMBER_INT_MIN_VALUE);
 		byte byteFieldWithMaxValueOnly = pojo.getByteFieldWithMaxValueOnly();
 		Assert.assertTrue(
 				"The byte field value cannot be greater than: "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						byteFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						byteFieldWithMaxValueOnly <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 		byte byteFieldWithMinAndMaxValue = pojo
 				.getByteFieldWithMinAndMaxValue();
 		Assert.assertTrue(
 				"The byte field value must be between: "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						byteFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_INT_MIN_VALUE
-						&& byteFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						byteFieldWithMinAndMaxValue >= TestConstants.NUMBER_INT_MIN_VALUE
+						&& byteFieldWithMinAndMaxValue <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 		Byte byteObjectFieldWithMinValueOnly = pojo
 				.getByteObjectFieldWithMinValueOnly();
 		Assert.assertNotNull(
@@ -234,8 +234,8 @@ public class AnnotationsUnitTest {
 				byteObjectFieldWithMinValueOnly);
 		Assert.assertTrue(
 				"The byte object value must be greate or equal than: "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE,
-						byteObjectFieldWithMinValueOnly >= PodamTestConstants.NUMBER_INT_MIN_VALUE);
+						+ TestConstants.NUMBER_INT_MIN_VALUE,
+						byteObjectFieldWithMinValueOnly >= TestConstants.NUMBER_INT_MIN_VALUE);
 
 		Byte byteObjectFieldWithMaxValueOnly = pojo
 				.getByteObjectFieldWithMaxValueOnly();
@@ -243,8 +243,8 @@ public class AnnotationsUnitTest {
 				byteObjectFieldWithMaxValueOnly);
 		Assert.assertTrue(
 				"The byte object field must have a value less or equal to  "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						byteObjectFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						byteObjectFieldWithMaxValueOnly <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		Byte byteObjectFieldWithMinAndMaxValue = pojo
 				.getByteObjectFieldWithMinAndMaxValue();
@@ -252,15 +252,15 @@ public class AnnotationsUnitTest {
 				byteObjectFieldWithMinAndMaxValue);
 		Assert.assertTrue(
 				"The byte object must have a value between: "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_INT_MAX_VALUE,
-						byteObjectFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_INT_MIN_VALUE
-						&& byteObjectFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_INT_MAX_VALUE);
+						+ TestConstants.NUMBER_INT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_INT_MAX_VALUE,
+						byteObjectFieldWithMinAndMaxValue >= TestConstants.NUMBER_INT_MIN_VALUE
+						&& byteObjectFieldWithMinAndMaxValue <= TestConstants.NUMBER_INT_MAX_VALUE);
 		byte byteFieldWithPreciseValue = pojo.getByteFieldWithPreciseValue();
 		Assert.assertTrue("The byte with precise value should have value: "
-				+ PodamTestConstants.BYTE_PRECISE_VALUE,
+				+ TestConstants.BYTE_PRECISE_VALUE,
 				byteFieldWithPreciseValue == Byte
-				.valueOf(PodamTestConstants.BYTE_PRECISE_VALUE));
+				.valueOf(TestConstants.BYTE_PRECISE_VALUE));
 
 	}
 
@@ -278,23 +278,23 @@ public class AnnotationsUnitTest {
 		short shortFieldWithMinValueOnly = pojo.getShortFieldWithMinValueOnly();
 		Assert.assertTrue(
 				"The short attribute with min value only should have a value greater than "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE,
-						shortFieldWithMinValueOnly >= PodamTestConstants.NUMBER_INT_MIN_VALUE);
+						+ TestConstants.NUMBER_INT_MIN_VALUE,
+						shortFieldWithMinValueOnly >= TestConstants.NUMBER_INT_MIN_VALUE);
 
 		short shortFieldWithMaxValueOnly = pojo.getShortFieldWithMaxValueOnly();
 		Assert.assertTrue(
 				"The short attribute with max value only should have a value less than: "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						shortFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						shortFieldWithMaxValueOnly <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		short shortFieldWithMinAndMaxValue = pojo
 				.getShortFieldWithMinAndMaxValue();
 		Assert.assertTrue(
 				"The short field with min and max values should have a value beetween "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_INT_MAX_VALUE,
-						shortFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_INT_MIN_VALUE
-						&& shortFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_INT_MAX_VALUE,
+						shortFieldWithMinAndMaxValue >= TestConstants.NUMBER_INT_MIN_VALUE
+						&& shortFieldWithMinAndMaxValue <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		Short shortObjectFieldWithMinValueOnly = pojo
 				.getShortObjectFieldWithMinValueOnly();
@@ -303,8 +303,8 @@ public class AnnotationsUnitTest {
 				shortObjectFieldWithMinValueOnly);
 		Assert.assertTrue(
 				"The short object attribute with min value only should have a value greater than "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE,
-						shortObjectFieldWithMinValueOnly >= PodamTestConstants.NUMBER_INT_MIN_VALUE);
+						+ TestConstants.NUMBER_INT_MIN_VALUE,
+						shortObjectFieldWithMinValueOnly >= TestConstants.NUMBER_INT_MIN_VALUE);
 
 		Short shortObjectFieldWithMaxValueOnly = pojo
 				.getShortObjectFieldWithMaxValueOnly();
@@ -313,8 +313,8 @@ public class AnnotationsUnitTest {
 				shortObjectFieldWithMaxValueOnly);
 		Assert.assertTrue(
 				"The short object attribute with max value only should have a value less than: "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						shortObjectFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						shortObjectFieldWithMaxValueOnly <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		Short shortObjectFieldWithMinAndMaxValue = pojo
 				.getShortObjectFieldWithMinAndMaxValue();
@@ -323,19 +323,19 @@ public class AnnotationsUnitTest {
 				shortObjectFieldWithMinAndMaxValue);
 		Assert.assertTrue(
 				"The short object field with min and max values should have a value beetween "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						shortObjectFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_INT_MIN_VALUE
-						&& shortObjectFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						shortObjectFieldWithMinAndMaxValue >= TestConstants.NUMBER_INT_MIN_VALUE
+						&& shortObjectFieldWithMinAndMaxValue <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		short shortFieldWithPreciseValue = pojo.getShortFieldWithPreciseValue();
 		Assert.assertTrue(
 				"The short attribute with precise value should have a value of "
-						+ PodamTestConstants.SHORT_PRECISE_VALUE
+						+ TestConstants.SHORT_PRECISE_VALUE
 						+ " but instead it had a value of "
 						+ shortFieldWithPreciseValue,
 						shortFieldWithPreciseValue == Short
-						.valueOf(PodamTestConstants.SHORT_PRECISE_VALUE));
+						.valueOf(TestConstants.SHORT_PRECISE_VALUE));
 
 	}
 
@@ -353,23 +353,23 @@ public class AnnotationsUnitTest {
 		char charFieldWithMinValueOnly = pojo.getCharFieldWithMinValueOnly();
 		Assert.assertTrue(
 				"The char attribute with min value only should have a value greater than "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE,
-						charFieldWithMinValueOnly >= PodamTestConstants.NUMBER_INT_MIN_VALUE);
+						+ TestConstants.NUMBER_INT_MIN_VALUE,
+						charFieldWithMinValueOnly >= TestConstants.NUMBER_INT_MIN_VALUE);
 
 		char charFieldWithMaxValueOnly = pojo.getCharFieldWithMaxValueOnly();
 		Assert.assertTrue(
 				"The char attribute with max value only should have a value less or equal than "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						charFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						charFieldWithMaxValueOnly <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		char charFieldWithMinAndMaxValue = pojo
 				.getCharFieldWithMinAndMaxValue();
 		Assert.assertTrue(
 				"The char attribute with min and max value must have a value between "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						charFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_INT_MIN_VALUE
-						&& charFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						charFieldWithMinAndMaxValue >= TestConstants.NUMBER_INT_MIN_VALUE
+						&& charFieldWithMinAndMaxValue <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		Character charObjectFieldWithMinValueOnly = pojo
 				.getCharObjectFieldWithMinValueOnly();
@@ -378,8 +378,8 @@ public class AnnotationsUnitTest {
 				charObjectFieldWithMinValueOnly);
 		Assert.assertTrue(
 				"The char object attribute with min value only should have a value greater than "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE,
-						charObjectFieldWithMinValueOnly >= PodamTestConstants.NUMBER_INT_MIN_VALUE);
+						+ TestConstants.NUMBER_INT_MIN_VALUE,
+						charObjectFieldWithMinValueOnly >= TestConstants.NUMBER_INT_MIN_VALUE);
 
 		Character charObjectFieldWithMaxValueOnly = pojo
 				.getCharObjectFieldWithMaxValueOnly();
@@ -388,8 +388,8 @@ public class AnnotationsUnitTest {
 				charObjectFieldWithMaxValueOnly);
 		Assert.assertTrue(
 				"The char object attribute with max value only should have a value less or equal than "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						charObjectFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						charObjectFieldWithMaxValueOnly <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		Character charObjectFieldWithMinAndMaxValue = pojo
 				.getCharObjectFieldWithMinAndMaxValue();
@@ -398,16 +398,16 @@ public class AnnotationsUnitTest {
 				charObjectFieldWithMinAndMaxValue);
 		Assert.assertTrue(
 				"The char object attribute with min and max value must have a value between "
-						+ PodamTestConstants.NUMBER_INT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_INT_ONE_HUNDRED,
-						charObjectFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_INT_MIN_VALUE
-						&& charObjectFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_INT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_INT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_INT_ONE_HUNDRED,
+						charObjectFieldWithMinAndMaxValue >= TestConstants.NUMBER_INT_MIN_VALUE
+						&& charObjectFieldWithMinAndMaxValue <= TestConstants.NUMBER_INT_ONE_HUNDRED);
 
 		char charFieldWithPreciseValue = pojo.getCharFieldWithPreciseValue();
 		Assert.assertTrue(
 				"The character field with precise value should have a value of "
-						+ PodamTestConstants.CHAR_PRECISE_VALUE,
-						charFieldWithPreciseValue == PodamTestConstants.CHAR_PRECISE_VALUE);
+						+ TestConstants.CHAR_PRECISE_VALUE,
+						charFieldWithPreciseValue == TestConstants.CHAR_PRECISE_VALUE);
 
 		char charFieldWithBlankInPreciseValue = pojo
 				.getCharFieldWithBlankInPreciseValue();
@@ -460,23 +460,23 @@ public class AnnotationsUnitTest {
 		float floatFieldWithMinValueOnly = pojo.getFloatFieldWithMinValueOnly();
 		Assert.assertTrue(
 				"The float field with min value only must have value greater than "
-						+ PodamTestConstants.NUMBER_FLOAT_MIN_VALUE,
-						floatFieldWithMinValueOnly >= PodamTestConstants.NUMBER_FLOAT_MIN_VALUE);
+						+ TestConstants.NUMBER_FLOAT_MIN_VALUE,
+						floatFieldWithMinValueOnly >= TestConstants.NUMBER_FLOAT_MIN_VALUE);
 
 		float floatFieldWithMaxValueOnly = pojo.getFloatFieldWithMaxValueOnly();
 		Assert.assertTrue(
 				"The float field with max value only can only have a value less or equal than "
-						+ PodamTestConstants.NUMBER_FLOAT_ONE_HUNDRED,
-						floatFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_FLOAT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_FLOAT_ONE_HUNDRED,
+						floatFieldWithMaxValueOnly <= TestConstants.NUMBER_FLOAT_ONE_HUNDRED);
 
 		float floatFieldWithMinAndMaxValue = pojo
 				.getFloatFieldWithMinAndMaxValue();
 		Assert.assertTrue(
 				"The float field with min and max value must have a value between "
-						+ PodamTestConstants.NUMBER_FLOAT_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_FLOAT_MAX_VALUE,
-						floatFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_FLOAT_MIN_VALUE
-						&& floatFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_FLOAT_MAX_VALUE);
+						+ TestConstants.NUMBER_FLOAT_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_FLOAT_MAX_VALUE,
+						floatFieldWithMinAndMaxValue >= TestConstants.NUMBER_FLOAT_MIN_VALUE
+						&& floatFieldWithMinAndMaxValue <= TestConstants.NUMBER_FLOAT_MAX_VALUE);
 
 		Float floatObjectFieldWithMinValueOnly = pojo
 				.getFloatObjectFieldWithMinValueOnly();
@@ -485,8 +485,8 @@ public class AnnotationsUnitTest {
 				floatObjectFieldWithMinValueOnly);
 		Assert.assertTrue(
 				"The float object attribute with min value only must have a value greater or equal than "
-						+ PodamTestConstants.NUMBER_FLOAT_MIN_VALUE,
-						floatObjectFieldWithMinValueOnly >= PodamTestConstants.NUMBER_FLOAT_MIN_VALUE);
+						+ TestConstants.NUMBER_FLOAT_MIN_VALUE,
+						floatObjectFieldWithMinValueOnly >= TestConstants.NUMBER_FLOAT_MIN_VALUE);
 
 		Float floatObjectFieldWithMaxValueOnly = pojo
 				.getFloatObjectFieldWithMaxValueOnly();
@@ -495,8 +495,8 @@ public class AnnotationsUnitTest {
 				floatObjectFieldWithMaxValueOnly);
 		Assert.assertTrue(
 				"The float object attribute with max value only must have a value less than or equal to "
-						+ PodamTestConstants.NUMBER_FLOAT_ONE_HUNDRED,
-						floatObjectFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_FLOAT_ONE_HUNDRED);
+						+ TestConstants.NUMBER_FLOAT_ONE_HUNDRED,
+						floatObjectFieldWithMaxValueOnly <= TestConstants.NUMBER_FLOAT_ONE_HUNDRED);
 
 		Float floatObjectFieldWithMinAndMaxValue = pojo
 				.getFloatObjectFieldWithMinAndMaxValue();
@@ -505,18 +505,18 @@ public class AnnotationsUnitTest {
 				floatObjectFieldWithMinAndMaxValue);
 		Assert.assertTrue(
 				"The float object attribute with min and max value only must have a value between "
-						+ PodamTestConstants.NUMBER_FLOAT_MIN_VALUE
+						+ TestConstants.NUMBER_FLOAT_MIN_VALUE
 						+ " and "
-						+ PodamTestConstants.NUMBER_FLOAT_MAX_VALUE,
-						floatObjectFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_FLOAT_MIN_VALUE
-						&& floatObjectFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_FLOAT_MAX_VALUE);
+						+ TestConstants.NUMBER_FLOAT_MAX_VALUE,
+						floatObjectFieldWithMinAndMaxValue >= TestConstants.NUMBER_FLOAT_MIN_VALUE
+						&& floatObjectFieldWithMinAndMaxValue <= TestConstants.NUMBER_FLOAT_MAX_VALUE);
 
 		float floatFieldWithPreciseValue = pojo.getFloatFieldWithPreciseValue();
 		Assert.assertTrue(
 				"The float field with precise value should have a value of "
-						+ PodamTestConstants.FLOAT_PRECISE_VALUE,
+						+ TestConstants.FLOAT_PRECISE_VALUE,
 						floatFieldWithPreciseValue == Float
-						.valueOf(PodamTestConstants.FLOAT_PRECISE_VALUE));
+						.valueOf(TestConstants.FLOAT_PRECISE_VALUE));
 
 		Float floatObjectFieldWithPreciseValue = pojo
 				.getFloatObjectFieldWithPreciseValue();
@@ -525,9 +525,9 @@ public class AnnotationsUnitTest {
 				floatObjectFieldWithPreciseValue);
 		Assert.assertTrue(
 				"The float object field with precise value should have a value of "
-						+ PodamTestConstants.FLOAT_PRECISE_VALUE,
+						+ TestConstants.FLOAT_PRECISE_VALUE,
 						floatObjectFieldWithPreciseValue.floatValue() == Float.valueOf(
-								PodamTestConstants.FLOAT_PRECISE_VALUE).floatValue());
+								TestConstants.FLOAT_PRECISE_VALUE).floatValue());
 
 	}
 
@@ -546,32 +546,32 @@ public class AnnotationsUnitTest {
 				.getDoubleFieldWithMinValueOnly();
 		Assert.assertTrue(
 				"The double attribute with min value only must have a value greater than "
-						+ PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE,
-						doubleFieldWithMinValueOnly >= PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE);
+						+ TestConstants.NUMBER_DOUBLE_MIN_VALUE,
+						doubleFieldWithMinValueOnly >= TestConstants.NUMBER_DOUBLE_MIN_VALUE);
 
 		double doubleFieldWithMaxValueOnly = pojo
 				.getDoubleFieldWithMaxValueOnly();
 		Assert.assertTrue(
 				"The double attribute with max value only must have a value less or equal to "
-						+ PodamTestConstants.NUMBER_DOUBLE_ONE_HUNDRED,
-						doubleFieldWithMaxValueOnly <= PodamTestConstants.NUMBER_DOUBLE_ONE_HUNDRED);
+						+ TestConstants.NUMBER_DOUBLE_ONE_HUNDRED,
+						doubleFieldWithMaxValueOnly <= TestConstants.NUMBER_DOUBLE_ONE_HUNDRED);
 
 		double doubleFieldWithMinAndMaxValue = pojo
 				.getDoubleFieldWithMinAndMaxValue();
 		Assert.assertTrue(
 				"The double attribute with min and mx value must have a value between "
-						+ PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE + " and "
-						+ PodamTestConstants.NUMBER_DOUBLE_MAX_VALUE,
-						doubleFieldWithMinAndMaxValue >= PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE
-						&& doubleFieldWithMinAndMaxValue <= PodamTestConstants.NUMBER_DOUBLE_MAX_VALUE);
+						+ TestConstants.NUMBER_DOUBLE_MIN_VALUE + " and "
+						+ TestConstants.NUMBER_DOUBLE_MAX_VALUE,
+						doubleFieldWithMinAndMaxValue >= TestConstants.NUMBER_DOUBLE_MIN_VALUE
+						&& doubleFieldWithMinAndMaxValue <= TestConstants.NUMBER_DOUBLE_MAX_VALUE);
 
 		double doubleFieldWithPreciseValue = pojo
 				.getDoubleFieldWithPreciseValue();
 		Assert.assertTrue(
 				"The double field with precise value should have a value of: "
-						+ PodamTestConstants.DOUBLE_PRECISE_VALUE,
+						+ TestConstants.DOUBLE_PRECISE_VALUE,
 						doubleFieldWithPreciseValue == Double
-						.valueOf(PodamTestConstants.DOUBLE_PRECISE_VALUE));
+						.valueOf(TestConstants.DOUBLE_PRECISE_VALUE));
 
 		Double doubleObjectFieldWithPreciseValue = pojo
 				.getDoubleObjectFieldWithPreciseValue();
@@ -580,9 +580,9 @@ public class AnnotationsUnitTest {
 				doubleObjectFieldWithPreciseValue);
 		Assert.assertTrue(
 				"The double object field with precise value should have a value of: "
-						+ PodamTestConstants.DOUBLE_PRECISE_VALUE,
+						+ TestConstants.DOUBLE_PRECISE_VALUE,
 						doubleObjectFieldWithPreciseValue.doubleValue() == Double
-						.valueOf(PodamTestConstants.DOUBLE_PRECISE_VALUE)
+						.valueOf(TestConstants.DOUBLE_PRECISE_VALUE)
 						.doubleValue());
 
 	}
@@ -603,17 +603,17 @@ public class AnnotationsUnitTest {
 				twentyLengthString);
 		Assert.assertTrue(
 				"The twenty length string must have a length of "
-						+ PodamTestConstants.STR_ANNOTATION_TWENTY_LENGTH
+						+ TestConstants.STR_ANNOTATION_TWENTY_LENGTH
 						+ "! but it did have a length of "
 						+ twentyLengthString.length(),
-						twentyLengthString.length() == PodamTestConstants.STR_ANNOTATION_TWENTY_LENGTH);
+						twentyLengthString.length() == TestConstants.STR_ANNOTATION_TWENTY_LENGTH);
 
 		String preciseValueString = pojo.getPreciseValueString();
 		Assert.assertNotNull("The precise value string cannot be null!",
 				preciseValueString);
 		Assert.assertEquals(
 				"The expected and actual String values don't match",
-				PodamTestConstants.STR_ANNOTATION_PRECISE_VALUE,
+				TestConstants.STR_ANNOTATION_PRECISE_VALUE,
 				preciseValueString);
 
 	}
@@ -631,9 +631,9 @@ public class AnnotationsUnitTest {
 				strList.isEmpty());
 		Assert.assertTrue(
 				"The string list must have "
-						+ PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS
+						+ TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS
 						+ " elements but it had only " + strList.size(),
-						strList.size() == PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS);
+						strList.size() == TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS);
 
 		String[] strArray = pojo.getStrArray();
 		Assert.assertNotNull("The array cannot be null!", strArray);
@@ -641,8 +641,8 @@ public class AnnotationsUnitTest {
 		Assert.assertTrue(
 				"The number of elements in the array (" + strArray.length
 				+ ") does not match "
-				+ PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS,
-				strArray.length == PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS);
+				+ TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS,
+				strArray.length == TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS);
 
 		Map<String, String> stringMap = pojo.getStringMap();
 		Assert.assertNotNull("The map cannot be null!", stringMap);
@@ -651,34 +651,34 @@ public class AnnotationsUnitTest {
 		Assert.assertTrue(
 				"The number of elements in the map (" + stringMap.size()
 				+ ") does not match "
-				+ PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS,
-				stringMap.size() == PodamTestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS);
+				+ TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS,
+				stringMap.size() == TestConstants.ANNOTATION_COLLECTION_NBR_ELEMENTS);
 
 	}
 
 	@Test
 	public void testPodamStrategyValueAnnotation() {
 
-		PodamStrategyPojo pojo = factory
-				.manufacturePojo(PodamStrategyPojo.class);
+		StrategyPojo pojo = factory
+				.manufacturePojo(StrategyPojo.class);
 		Assert.assertNotNull("The post code pojo cannot be null!", pojo);
 
 		String postCode = pojo.getPostCode();
 		Assert.assertNotNull("The post code cannot be null!", postCode);
 		Assert.assertEquals("The post code does not match the expected value",
-				PodamTestConstants.POST_CODE, postCode);
+				TestConstants.POST_CODE, postCode);
 
 		String postCode2 = pojo.getPostCode2();
 		Assert.assertNotNull("The post code 2 cannot be null!", postCode2);
 		Assert.assertEquals("The post code 2 does not match the expected value",
-				PodamTestConstants.POST_CODE, postCode2);
+				TestConstants.POST_CODE, postCode2);
 
 		String postCode3 = pojo.getPostCode3();
 		Assert.assertNotNull("The post code 3 cannot be null!", postCode3);
 		Assert.assertEquals("The post code 3 does not match the expected value",
-				PodamTestConstants.POST_CODE, postCode3);
+				TestConstants.POST_CODE, postCode3);
 
-		Calendar expectedBirthday = PodamTestUtils.getMyBirthday();
+		Calendar expectedBirthday = TestUtils.getMyBirthday();
 
 		Calendar myBirthday = pojo.getMyBirthday();
 

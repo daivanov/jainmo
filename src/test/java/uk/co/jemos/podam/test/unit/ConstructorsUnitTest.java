@@ -11,7 +11,7 @@ import uk.co.jemos.podam.test.dto.GenericInConstructorPojo;
 import uk.co.jemos.podam.test.dto.GenericInSetterPojo;
 import uk.co.jemos.podam.test.dto.GenericInStaticConstructorPojo;
 import uk.co.jemos.podam.test.dto.MultipleGenericInConstructorPojo;
-import uk.co.jemos.podam.test.utils.PodamTestUtils;
+import uk.co.jemos.podam.test.utils.TestUtils;
 
 /**
  * @author daivanov
@@ -92,7 +92,7 @@ public class ConstructorsUnitTest {
 						String.class, Character.class, Byte.class, Integer.class);
 		Assert.assertNotNull("Instantiation failed", pojo);
 		Assert.assertEquals("Class instantiation failed", String.class, pojo.getType());
-		PodamTestUtils.assertCollectionElementsType(pojo.getList(), Character.class);
-		PodamTestUtils.assertMapElementsType(pojo.getMap(), Byte.class, Integer.class);
+		TestUtils.assertCollectionElementsType(pojo.getList(), Character.class);
+		TestUtils.assertMapElementsType(pojo.getMap(), Byte.class, Integer.class);
 	}
 }

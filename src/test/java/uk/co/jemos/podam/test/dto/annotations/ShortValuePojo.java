@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamShortValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * POJO to test {@link PodamShortValue} annotation
@@ -22,25 +22,25 @@ public class ShortValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamShortValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamShortValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private short shortFieldWithMinValueOnly;
 
-	@PodamShortValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamShortValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private short shortFieldWithMaxValueOnly;
 
-	@PodamShortValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamShortValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private short shortFieldWithMinAndMaxValue;
 
-	@PodamShortValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE)
+	@PodamShortValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE)
 	private Short shortObjectFieldWithMinValueOnly;
 
-	@PodamShortValue(maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamShortValue(maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Short shortObjectFieldWithMaxValueOnly;
 
-	@PodamShortValue(minValue = PodamTestConstants.NUMBER_INT_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_INT_ONE_HUNDRED)
+	@PodamShortValue(minValue = TestConstants.NUMBER_INT_MIN_VALUE, maxValue = TestConstants.NUMBER_INT_ONE_HUNDRED)
 	private Short shortObjectFieldWithMinAndMaxValue;
 
-	@PodamShortValue(numValue = PodamTestConstants.SHORT_PRECISE_VALUE)
+	@PodamShortValue(numValue = TestConstants.SHORT_PRECISE_VALUE)
 	private short shortFieldWithPreciseValue;
 
 	// ------------------->> Constructors

@@ -6,7 +6,7 @@ package uk.co.jemos.podam.test.dto.annotations;
 import java.io.Serializable;
 
 import uk.co.jemos.podam.annotation.PodamDoubleValue;
-import uk.co.jemos.podam.test.utils.PodamTestConstants;
+import uk.co.jemos.podam.test.utils.TestConstants;
 
 /**
  * POJO to test the {@link PodamDoubleValue} annotation
@@ -22,28 +22,28 @@ public class DoubleValuePojo implements Serializable {
 
 	// ------------------->> Instance / Static variables
 
-	@PodamDoubleValue(minValue = PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE)
+	@PodamDoubleValue(minValue = TestConstants.NUMBER_DOUBLE_MIN_VALUE)
 	private double doubleFieldWithMinValueOnly;
 
-	@PodamDoubleValue(maxValue = PodamTestConstants.NUMBER_DOUBLE_ONE_HUNDRED)
+	@PodamDoubleValue(maxValue = TestConstants.NUMBER_DOUBLE_ONE_HUNDRED)
 	private double doubleFieldWithMaxValueOnly;
 
-	@PodamDoubleValue(minValue = PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_DOUBLE_MAX_VALUE)
+	@PodamDoubleValue(minValue = TestConstants.NUMBER_DOUBLE_MIN_VALUE, maxValue = TestConstants.NUMBER_DOUBLE_MAX_VALUE)
 	private double doubleFieldWithMinAndMaxValue;
 
-	@PodamDoubleValue(numValue = PodamTestConstants.DOUBLE_PRECISE_VALUE)
+	@PodamDoubleValue(numValue = TestConstants.DOUBLE_PRECISE_VALUE)
 	private double doubleFieldWithPreciseValue;
 
-	@PodamDoubleValue(minValue = PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE)
+	@PodamDoubleValue(minValue = TestConstants.NUMBER_DOUBLE_MIN_VALUE)
 	private Double doubleObjectFieldWithMinValueOnly;
 
-	@PodamDoubleValue(maxValue = PodamTestConstants.NUMBER_DOUBLE_ONE_HUNDRED)
+	@PodamDoubleValue(maxValue = TestConstants.NUMBER_DOUBLE_ONE_HUNDRED)
 	private Double doubleObjectFieldWithMaxValueOnly;
 
-	@PodamDoubleValue(minValue = PodamTestConstants.NUMBER_DOUBLE_MIN_VALUE, maxValue = PodamTestConstants.NUMBER_DOUBLE_MAX_VALUE)
+	@PodamDoubleValue(minValue = TestConstants.NUMBER_DOUBLE_MIN_VALUE, maxValue = TestConstants.NUMBER_DOUBLE_MAX_VALUE)
 	private Double doubleObjectFieldWithMinAndMaxValue;
 
-	@PodamDoubleValue(numValue = PodamTestConstants.DOUBLE_PRECISE_VALUE)
+	@PodamDoubleValue(numValue = TestConstants.DOUBLE_PRECISE_VALUE)
 	private Double doubleObjectFieldWithPreciseValue;
 
 	// ------------------->> Constructors

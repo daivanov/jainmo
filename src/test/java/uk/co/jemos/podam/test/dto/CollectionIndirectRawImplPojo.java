@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class CollectionIndirectRawImplPojo implements PodamRawList {
+public class CollectionIndirectRawImplPojo implements RawList {
 
 	private List<Object> list = new LinkedList<Object>();
 

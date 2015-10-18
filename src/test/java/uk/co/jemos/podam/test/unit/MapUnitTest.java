@@ -26,7 +26,7 @@ public class MapUnitTest {
 
 	private void testMap(Class<?> mapType, int mapSize) {
 		Map<?,?> pojo = (Map<?,?>)factory.manufacturePojo(mapType,
-				String.class, PodamTestInterface.class);
+				String.class, TestInterface.class);
 		Assert.assertNotNull("Construction failed", pojo);
 		Assert.assertEquals("Wrong size of key set",
 				mapSize, pojo.keySet().size());
@@ -38,7 +38,7 @@ public class MapUnitTest {
 	public void testSortedMapCreation() {
 
 		testMap(TreeMap.class,
-				strategy.getNumberOfCollectionElements(PodamTestInterface.class));
+				strategy.getNumberOfCollectionElements(TestInterface.class));
 	}
 
 	@Test
@@ -51,6 +51,6 @@ public class MapUnitTest {
 	public void testHashMapCreation() {
 
 		testMap(HashMap.class,
-				strategy.getNumberOfCollectionElements(PodamTestInterface.class));
+				strategy.getNumberOfCollectionElements(TestInterface.class));
 	}
 }
